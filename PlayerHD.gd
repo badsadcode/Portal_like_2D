@@ -97,9 +97,9 @@ func handle_inputs(aDelta):
 	else:		
 		body_sprite.play("stand")
 	
-#	if is_on_floor() and !exiting_portal:
+	if is_on_floor() and !exiting_portal:
 ## TM 20210725 zero the max velocity, or we'll eventually throw the player into orbit
-#		max_velocity = Vector2.ZERO
+		max_velocity = Vector2.ZERO
 	
 	if is_on_floor():
 		if x_input == 0:
