@@ -31,9 +31,11 @@ func _process(delta):
 		if !customizator:
 			character_customizator.set_global_position(self.position)
 			customizator = true
+			
 		else:
 			character_customizator.set_global_position(character_customizator.original_position)
 			customizator = false
+			character_customizator.release_focus()
 	
 
 

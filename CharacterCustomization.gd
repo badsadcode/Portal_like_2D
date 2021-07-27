@@ -7,7 +7,7 @@ onready var hat_decrease = $"VBoxContainer/Hat/HBoxContainer/hat_increase_button
 
 onready var torso_increase = $"VBoxContainer/Torso/HBoxContainer/torso_increase_button"
 onready var torso_color_button = $"VBoxContainer/Torso/HBoxContainer/Button2"
-onready var torso_decrase = $"VBoxContainer/Torso/HBoxContainer/torso_decrease_button"
+onready var torso_decrease = $"VBoxContainer/Torso/HBoxContainer/torso_decrease_button"
 
 onready var legs_increase = $"VBoxContainer/Pants/HBoxContainer/legs_increase_button"
 onready var legs_color_button = $"VBoxContainer/Pants/HBoxContainer/Button2"
@@ -89,33 +89,38 @@ func _on_hat_increase_button_pressed():
 	hat_color_index = increase_index(COLORS,hat_color_index)
 	set_color(hat_color_button, hat_style_override, hat_color_index)
 	emit_signal("color_change")
+	hat_increase.release_focus()
 
 
 func _on_hat_decrease_button_pressed():	
 	hat_color_index = decrease_index(COLORS,hat_color_index)	
 	set_color(hat_color_button, hat_style_override, hat_color_index)
 	emit_signal("color_change")
+	hat_decrease.release_focus()
 
 
 func _on_torso_decrease_button_pressed():	
 	torso_color_index = decrease_index(COLORS,torso_color_index)	
 	set_color(torso_color_button, torso_style_override, torso_color_index)
 	emit_signal("color_change")
+	torso_decrease.release_focus()
 
 
 func _on_torso_increase_button_pressed():	
 	torso_color_index = increase_index(COLORS,torso_color_index)	
 	set_color(torso_color_button, torso_style_override, torso_color_index)
 	emit_signal("color_change")
+	torso_increase.release_focus()
 
 
 func _on_legs_decrease_button_pressed():	
 	legs_color_index = decrease_index(COLORS,legs_color_index)	
 	set_color(legs_color_button, legs_style_override, legs_color_index)
 	emit_signal("color_change")
-
+	legs_decrease.release_focus()
 
 func _on_legs_increase_button_pressed():	
 	legs_color_index = increase_index(COLORS,legs_color_index)	
 	set_color(legs_color_button, legs_style_override, legs_color_index)
 	emit_signal("color_change")
+	legs_increase.release_focus()
