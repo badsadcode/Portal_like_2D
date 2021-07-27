@@ -32,6 +32,7 @@ onready var body_sprite = $"Body/AnimatedSprite"
 # let's not search for the raycast in _process(), for the same reason
 onready var raycast = $"RayCast2D"
 
+
 # portal type constants, for code clarity
 const PORTAL_ORANGE = 0
 const PORTAL_BLUE = 1
@@ -46,7 +47,7 @@ func _process(delta):
 	
 	update()
 	set_sprite_direction()
-	display_info()
+	#display_info()
 	
 	#GUN RAYCAST
 	raycast.cast_to = (get_viewport().get_mouse_position() - get_global_position()) * 300
