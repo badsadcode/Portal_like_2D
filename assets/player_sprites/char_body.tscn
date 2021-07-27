@@ -1,32 +1,29 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://assets/player_sprites/torso_animation.png" type="Texture" id=1]
-[ext_resource path="res://assets/player_sprites/legs_animation.png" type="Texture" id=2]
-[ext_resource path="res://assets/player_sprites/head_animation.png" type="Texture" id=3]
-[ext_resource path="res://assets/player_sprites/hands_animation.png" type="Texture" id=4]
-[ext_resource path="res://CustomizablePlayer.gd" type="Script" id=5]
-
-[sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 5, 7.5 )
+[ext_resource path="res://assets/player_sprites/legs_animation.png" type="Texture" id=1]
+[ext_resource path="res://assets/player_sprites/head_animation.png" type="Texture" id=2]
+[ext_resource path="res://assets/player_sprites/hands_animation.png" type="Texture" id=3]
+[ext_resource path="res://assets/player_sprites/torso_animation.png" type="Texture" id=4]
+[ext_resource path="res://assets/player_sprites/char_body.gd" type="Script" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=6]
@@ -43,23 +40,23 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=12]
@@ -76,23 +73,23 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=18]
@@ -109,23 +106,23 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 3 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=24]
@@ -141,35 +138,25 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="CustomizablePlayer" type="KinematicBody2D"]
+[node name="Body" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 0.5 )
-shape = SubResource( 25 )
-
-[node name="Body" type="Node2D" parent="."]
-
-[node name="Head" type="AnimatedSprite" parent="Body"]
+[node name="Head" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "stand"
 playing = true
 
-[node name="Torso" type="AnimatedSprite" parent="Body"]
+[node name="Torso" type="AnimatedSprite" parent="."]
 frames = SubResource( 12 )
 animation = "stand"
 playing = true
 
-[node name="Legs" type="AnimatedSprite" parent="Body"]
-modulate = Color( 0.203922, 0.67451, 0.882353, 1 )
+[node name="Legs" type="AnimatedSprite" parent="."]
 frames = SubResource( 18 )
 animation = "stand"
 playing = true
 
-[node name="Arms" type="AnimatedSprite" parent="Body"]
+[node name="Arms" type="AnimatedSprite" parent="."]
 frames = SubResource( 24 )
 animation = "stand"
 playing = true
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-enabled = true

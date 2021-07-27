@@ -1,10 +1,11 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://tileset.png" type="Texture" id=1]
 [ext_resource path="res://DebugWindow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Coord.tscn" type="PackedScene" id=3]
-[ext_resource path="res://PlayerHD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://CharacterCustomization.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World.gd" type="Script" id=5]
+[ext_resource path="res://CustomizablePlayer.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -733,11 +734,17 @@ __meta__ = {
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.831373, 0.831373, 0.831373, 1 )
 
-[node name="PlayerHD" parent="." instance=ExtResource( 4 )]
-position = Vector2( 86.4145, 96.3979 )
-
 [node name="DebugWindow" parent="." instance=ExtResource( 2 )]
 margin_left = 2.65165
 margin_top = 1.23744
 margin_right = 258.652
 margin_bottom = 69.2374
+
+[node name="CustomizablePlayer" parent="." instance=ExtResource( 6 )]
+position = Vector2( 116, 117 )
+
+[node name="CharacterCustomization" parent="." instance=ExtResource( 4 )]
+margin_left = -1.5
+margin_top = -152.0
+margin_right = -1.5
+margin_bottom = -152.0

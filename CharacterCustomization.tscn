@@ -1,0 +1,154 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/player_sprites/char_body.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/fonts/THEME_CharacterCustomization.tres" type="Theme" id=3]
+[ext_resource path="res://CharacterCustomization.gd" type="Script" id=4]
+
+[node name="CharacterCustomization" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+theme = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 104.0
+margin_bottom = 126.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hat" type="VBoxContainer" parent="VBoxContainer"]
+margin_right = 96.0
+margin_bottom = 38.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Hat"]
+margin_right = 96.0
+margin_bottom = 16.0
+text = "HAT"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Hat"]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hat_decrease_button" type="Button" parent="VBoxContainer/Hat/HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 12, 0 )
+text = "<"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Hat/HBoxContainer"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 64, 0 )
+disabled = true
+
+[node name="hat_increase_button" type="Button" parent="VBoxContainer/Hat/HBoxContainer"]
+margin_left = 84.0
+margin_right = 96.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 12, 0 )
+text = ">"
+
+[node name="Torso" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 42.0
+margin_right = 96.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Torso"]
+margin_right = 96.0
+margin_bottom = 16.0
+text = "TORSO"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Torso"]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 38.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="torso_decrease_button" type="Button" parent="VBoxContainer/Torso/HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 12, 0 )
+text = "<"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Torso/HBoxContainer"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 64, 0 )
+disabled = true
+
+[node name="torso_increase_button" type="Button" parent="VBoxContainer/Torso/HBoxContainer"]
+margin_left = 84.0
+margin_right = 96.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 12, 0 )
+text = ">"
+
+[node name="Pants" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 84.0
+margin_right = 96.0
+margin_bottom = 122.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Pants"]
+margin_right = 96.0
+margin_bottom = 16.0
+text = "PANTS"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Pants"]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 38.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="legs_decrease_button" type="Button" parent="VBoxContainer/Pants/HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 12, 0 )
+text = "<"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Pants/HBoxContainer"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 64, 0 )
+disabled = true
+
+[node name="legs_increase_button" type="Button" parent="VBoxContainer/Pants/HBoxContainer"]
+margin_left = 84.0
+margin_right = 96.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 12, 0 )
+text = ">"
+
+[node name="Body" parent="." instance=ExtResource( 1 )]
+position = Vector2( 193, 63 )
+rotation = -3.14159
+scale = Vector2( 5, -5 )
+
+[connection signal="pressed" from="VBoxContainer/Hat/HBoxContainer/hat_decrease_button" to="." method="_on_hat_decrease_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Hat/HBoxContainer/hat_increase_button" to="." method="_on_hat_increase_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Torso/HBoxContainer/torso_decrease_button" to="." method="_on_torso_decrease_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Torso/HBoxContainer/torso_increase_button" to="." method="_on_torso_increase_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Pants/HBoxContainer/legs_decrease_button" to="." method="_on_legs_decrease_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Pants/HBoxContainer/legs_increase_button" to="." method="_on_legs_increase_button_pressed"]
