@@ -19,7 +19,7 @@ func set_debug_line(aLine, aText, aValue):
 func _process(delta):
 	set_debug_line(debug_line1, "MOTION.X", player.motion.x)
 	set_debug_line(debug_line2, "MOTION.Y", player.motion.y)
-	set_debug_line(debug_line3, "POSTIOTION", player.get_global_position())
+	set_debug_line(debug_line3, "POSITIION", player.get_global_position())
 	set_debug_line(debug_line4, "MAX VELOCITY", player.max_velocity)
 	if Global.PortalContainer[0] != null:
 		set_debug_line(debug_line5, "ORANGE PORTAL", Global.PortalContainer[0].position)
