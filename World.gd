@@ -15,7 +15,8 @@ onready var debug_line6 = debug_window.get_node("VBoxContainer/Line6")
 
 func set_debug_line(aLine, aText, aValue):
 	aLine.text = aText + " : " +str(aValue)
-	
+
+
 func _process(delta):
 	set_debug_line(debug_line1, "MOTION.X", player.motion.x)
 	set_debug_line(debug_line2, "MOTION.Y", player.motion.y)
