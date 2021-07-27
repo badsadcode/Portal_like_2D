@@ -86,11 +86,9 @@ func _draw():
 #  by applying Pythagorean Theorem
 func get_max_velocity():
 #NOT SURE IF GIVE CORRECT VALUE. I NEED TO CHECK THIS CONDITION
-	current_velocity = motion
-	var current_calculated_velocity = sqrt(pow(current_velocity.x, 2) + pow(current_velocity.y, 2))
-	var max_calculated_velocity = sqrt(pow(max_velocity.x, 2) + pow(max_velocity.y, 2))
-	if current_calculated_velocity > max_calculated_velocity:
-		max_velocity = current_velocity
+	current_velocity = motion		
+	if (abs(current_velocity.x) >= abs(max_velocity.x)) or ((abs(current_velocity.y) >= abs(max_velocity.y))):
+			max_velocity = current_velocity
 
 
 func _physics_process(delta):
@@ -122,9 +120,9 @@ func handle_inputs(aDelta):
 	else:		
 		play_animations("stand")
 	
-	if is_on_floor() and !exiting_portal:
-## TM 20210725 zero the max velocity, or we'll eventually throw the player into orbit
-		max_velocity = Vector2.ZERO
+#	if is_on_floor() and !exiting_portal:
+### TM 20210725 zero the max velocity, or we'll eventually throw the player into orbit
+#		max_velocity = Vector2.ZERO
 	
 	if is_on_floor():
 		if x_input == 0:
