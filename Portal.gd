@@ -30,7 +30,6 @@ func _on_Area2D_body_entered(body):
 			#WE NEED TO CHECK IF BOTH PORTALS ARE PRESENT IN THE GAME
 			if Global.PortalContainer[0] and Global.PortalContainer[1]:
 				#DECISION WHERE TO PUT OBJECT (SET ITS POSITION TO THE OTHER PORTAL SPAWN POINT)
-
 				body.exiting_portal = true
 				body.set_global_position(Global.PortalContainer[abs(type - 1)].spawn_position)
 
@@ -48,6 +47,7 @@ func _on_Area2D_body_exited(body):
 			8:
 				print("entrance up: halting horizontal motion, vertical motion is unaffected")
 				body.motion.x = 0
+				body.motion.y = 0 #PREVENTS PLAYER BEING THROWN AGAIN INTO PORTAL WHICH HE'S EXITING
 			6:
 				print("entrance right: setting horizontal motion to the higher of ", exit_speed, " or ", body.MAX_SPEED, " and reversing it")
 				print("                halting vertical motion")
@@ -56,6 +56,7 @@ func _on_Area2D_body_exited(body):
 			2:
 				print("entrance down: halting horizontal motion, flipping and clamping vertical motion to higher of ", exit_speed, " or 150 (not 64?)")
 				body.motion.x = 0
+			
 				body.motion.y = -clamp(exit_speed * FORCE_MULTIPLIER_Y,exit_speed,150)
 			4:
 				print("entrance left: horizontal motion is exit_speed or 64, halting vertical motion")
