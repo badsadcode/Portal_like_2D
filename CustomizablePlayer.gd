@@ -13,8 +13,8 @@ var motion = Vector2()
 
 	
 #HELPER VARIABLES VELOCITY
-var max_velocity = Vector2.ZERO
-var current_velocity = Vector2.ZERO
+var max_velocity = 0.0
+var current_velocity = 0.0
 
 #PORTAL RELATED VARIABLES
 var OrangeDeployed = false
@@ -26,9 +26,6 @@ onready var coord = $"../Coord"
 onready var tilemap = $"../TileMap"
 var PortalObject = load("res://Portal.tscn")
 
-# TM 20210725 - replaced all instances of $"Body/AnimatedSprite" with this onready var,
-#  so we're only searching the tree once instead of constantly
-#  (constant searching nerfs performance)
 onready var body_torso = $"Body/Torso"
 onready var body_head = $"Body/Head"
 onready var body_legs = $"Body/Legs"
@@ -82,13 +79,14 @@ func _draw():
 	draw_line(Vector2(0,0), raycast.get_collision_point() - get_global_position(), laser_beam_color, 1.0, true)
 
 
-# TM 20210725 - made velocity calculations more accurate and less error-prone
-#  by applying Pythagorean Theorem
 func get_max_velocity():
-#NOT SURE IF GIVE CORRECT VALUE. I NEED TO CHECK THIS CONDITION
-	current_velocity = motion		
-	if (abs(current_velocity.x) >= abs(max_velocity.x)) or ((abs(current_velocity.y) >= abs(max_velocity.y))):
-			max_velocity = current_velocity
+	current_velocity = max(abs(motion.x), abs(motion.y))
+	if current_velocity >= max_velocity:
+		max_velocity = current_velocity
+	else:
+		max_velocity=lerp(max_velocity, MAX_SPEED, FRICTION)
+	
+			
 
 
 func _physics_process(delta):
@@ -107,9 +105,8 @@ func handle_inputs(aDelta):
 	#APPLY GRAVITY
 	motion.y += GRAVITY  * aDelta
 	play_animations("run")
-	#VERTICAL INPUT VARIABLE, CAN GET THESE VALUES (-1,0,1) # TM 20210725 - x is the horizontal axis, not the vertical
-	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
 	
+	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")	
 	if x_input != 0:
 		play_animations("run")
 		if is_on_floor():
@@ -119,11 +116,8 @@ func handle_inputs(aDelta):
 		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 	else:		
 		play_animations("stand")
-	
-#	if is_on_floor() and !exiting_portal:
-### TM 20210725 zero the max velocity, or we'll eventually throw the player into orbit
-#		max_velocity = Vector2.ZERO
-	
+
+
 	if is_on_floor():
 		if x_input == 0:
 			motion.x = lerp(motion.x, 0, FRICTION)
@@ -157,11 +151,13 @@ func place_portal(aPortalType):
 		var NewPortal = PortalObject.instance()		
 		Global.PortalContainer[aPortalType] = NewPortal		
 		Global.PortalContainer[aPortalType].type = aPortalType			
-# TM20210705 - removed the "else" portion, the last 3 lines are run regardless of the conditional
-	Global.PortalContainer[aPortalType].set_rotation_degrees(getPortalRotation(raycast))
-	Global.PortalContainer[aPortalType].position = getPortalPosition(raycast, tilemap, coord.get_global_position(), tilemap.get_cell_size())			
-	deployPortals()
-	Global.PortalContainer[aPortalType].spawn_position = Global.PortalContainer[aPortalType].get_node("Particles2D").get_global_position()
+		Global.PortalContainer[aPortalType].set_rotation_degrees(getPortalRotation($RayCast2D))
+		Global.PortalContainer[aPortalType].position = getPortalPosition($RayCast2D, tilemap, coord.get_global_position(), tilemap.get_cell_size())			
+		
+	else:
+		Global.PortalContainer[aPortalType].set_rotation_degrees(getPortalRotation($RayCast2D))			
+		Global.PortalContainer[aPortalType].position = getPortalPosition($RayCast2D, tilemap, coord.get_global_position(), tilemap.get_cell_size())
+		Global.PortalContainer[aPortalType].spawn_position = Global.PortalContainer[aPortalType].get_node("Particles2D").get_global_position()	
 
 
 func getPortalRotation(aRayCast : RayCast2D):

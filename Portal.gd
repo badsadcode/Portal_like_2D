@@ -22,7 +22,7 @@ func _ready():
 func _on_Area2D_body_entered(body):
 	#IF OBJECT THAT ENTERED PORTAL IS NOT A TILEMAP (NO TileMap STRING IN THE NAME OF OBJECT
 	if !("TileMap" in body.name):
-		exit_speed = max(abs(body.max_velocity.x), abs(body.max_velocity.y))#body.max_velocity = body.current_velocity
+		exit_speed = body.max_velocity
 		print("_on_Area2D_body_entered(): exit_speed = ", exit_speed)
 
 		#CHECK IF PLAYER(OR OBJECT) IS EXITING THE PORTAL OR ENTERING IT
