@@ -43,25 +43,26 @@ func _on_Area2D_body_exited(body):
 		#THIS IS MOST PROBLEMATIC FOR ME. I FOUND THAT THESE RULES WORKS QUITE WELL, BUT THEY SHOULD BE CHANGED
 		
 		# check the exit_direction of the other portal:
-		match getPortalExitDirection(Global.PortalContainer[abs(type - 1)]):
-			8:
-				print("entrance up: halting horizontal motion, vertical motion is unaffected")
-				body.motion.x = 0
-				body.motion.y = 0 #PREVENTS PLAYER BEING THROWN AGAIN INTO PORTAL WHICH HE'S EXITING
-			6:
-				print("entrance right: setting horizontal motion to the higher of ", exit_speed, " or ", body.MAX_SPEED, " and reversing it")
-				print("                halting vertical motion")
-				body.motion.x = -max(exit_speed * FORCE_MULTIPLIER, body.MAX_SPEED)
-				body.motion.y = 0
-			2:
-				print("entrance down: halting horizontal motion, flipping and clamping vertical motion to higher of ", exit_speed, " or 150 (not 64?)")
-				body.motion.x = 0
-			
-				body.motion.y = -clamp(exit_speed * FORCE_MULTIPLIER_Y,exit_speed,150)
-			4:
-				print("entrance left: horizontal motion is exit_speed or 64, halting vertical motion")
-				body.motion.x = max(exit_speed * FORCE_MULTIPLIER, body.MAX_SPEED)
-				body.motion.y = 0
+		if Global.PortalContainer[0] != null and Global.PortalContainer[1] !=null:
+			match getPortalExitDirection(Global.PortalContainer[abs(type - 1)]):
+				8:
+					print("entrance up: halting horizontal motion, vertical motion is unaffected")
+					body.motion.x = 0
+					body.motion.y = 0 #PREVENTS PLAYER BEING THROWN AGAIN INTO PORTAL WHICH HE'S EXITING
+				6:
+					print("entrance right: setting horizontal motion to the higher of ", exit_speed, " or ", body.MAX_SPEED, " and reversing it")
+					print("                halting vertical motion")
+					body.motion.x = -max(exit_speed * FORCE_MULTIPLIER, body.MAX_SPEED)
+					body.motion.y = 0
+				2:
+					print("entrance down: halting horizontal motion, flipping and clamping vertical motion to higher of ", exit_speed, " or 150 (not 64?)")
+					body.motion.x = 0
+				
+					body.motion.y = -clamp(exit_speed * FORCE_MULTIPLIER_Y,exit_speed,150)
+				4:
+					print("entrance left: horizontal motion is exit_speed or 64, halting vertical motion")
+					body.motion.x = max(exit_speed * FORCE_MULTIPLIER, body.MAX_SPEED)
+					body.motion.y = 0
 
 #		if self.type == 0:
 #			if Global.PortalContainer[1] != null:
