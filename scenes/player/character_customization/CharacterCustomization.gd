@@ -68,7 +68,7 @@ func _ready():
 	set_color(hat_color_button, hat_style_override, hat_color_index)
 	set_color(torso_color_button, torso_style_override, torso_color_index)
 	set_color(legs_color_button, legs_style_override, legs_color_index)
-	
+	set_model()
 
 func set_model_colors():	
 	das_model_torso.set_modulate(COLORS[torso_color_index])
@@ -95,7 +95,7 @@ func set_model():
 
 
 func increase_index(aArray, aIndex):
-	if aIndex + 1 < aArray.size()-1:		
+	if aIndex + 1 <= aArray.size()-1:		
 		aIndex += 1
 	else:		
 		return 0
