@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 #MOVEMENT CONSTANTS
 const ACCELERATION = 1056
-const MAX_SPEED = 64
+const MAX_SPEED = 72
 const FRICTION = 0.125
 const GRAVITY = Global.TILE_SIZE * 20
 const AIR_RESISTANCE = 0.1#075
@@ -39,10 +39,7 @@ onready var raycast = $"RayCast2D"
 const PORTAL_ORANGE = 0
 const PORTAL_BLUE = 1
 func _ready():
-	body_torso.set_modulate(Playervars.player_torso_color)
-	body_head.set_modulate(Playervars.player_skin_color)
-	body_arms.set_modulate(Playervars.player_skin_color)
-	body_legs.set_modulate(Playervars.player_legs_color)
+	set_colors()
 
 func set_sprite_direction():
 # TM 20210725 - optimized conditional statement

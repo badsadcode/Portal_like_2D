@@ -4,7 +4,11 @@ extends Node
 var PortalContainer = []
 const TILE_SIZE = 8
 
+signal add_message(aMessage)
 
+func add_message(aMessage):
+	emit_signal("add_message",aMessage)
+	
 func _ready():
 	#SET THE SIZE OF PORTALCONTAINTER ARRAY TO TWO ELEMENTS (0 AND 1). BOTH ARE NULL AT THIS MOMENT.
 	PortalContainer.resize(2)

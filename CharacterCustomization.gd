@@ -55,17 +55,15 @@ func set_model_colors():
 	das_model_legs.set_modulate(COLORS[legs_color_index])
 	Playervars.player_torso_color = COLORS[torso_color_index]
 	Playervars.player_legs_color = COLORS[legs_color_index]
-	print ("COLOR CHANGED BY SIGNAL")
+	
 
 
 
 
 func increase_index(aArray, aIndex):
-	if aIndex + 1 < aArray.size()-1:
-		print ("No zwiekszykłem")
+	if aIndex + 1 < aArray.size()-1:		
 		aIndex += 1
-	else:
-		print ("Cos poszlo nie tak")
+	else:		
 		return 0
 	return aIndex
 

@@ -1,8 +1,12 @@
 extends Node2D
 
+onready var debug_window= $"../DebugWindow/VBoxContainer/console"
+
 var type #TYPE OF PORTAL. DEPENDING ON VALUE (0 AND 1) THE COLOR IS SET
 var spawn_position #POSITION WHERE OBJECTS WILL SPAWN WHEN EXITING THE PORTAL
 var exit_speed = 0.0
+var last_exit_speed = 0.0
+
 const FORCE_MULTIPLIER = 1.75
 const FORCE_MULTIPLIER_Y = 0.75
 
@@ -10,8 +14,12 @@ const FORCE_MULTIPLIER_Y = 0.75
 const COLOR_PORTAL_0 : Color = Color(1, 0.694118, 0)	# orange portal
 const COLOR_PORTAL_1 : Color = Color(0, 0.4375, 1)		# blue portal
 
+func add_message(aMessage: String):
+	debug_window.add_text(aMessage+"\n")
+	
 
 func _ready():
+	Global.connect("add_message",self,"add_message")
 	#SET spawn_position variable TO POSITION OF PARTICLES2D NODE OF THE PORTAL
 	spawn_position = $Particles2D.get_global_position()
 	#SETTING COLOR DEPENDING ON THE type VARIABLE
@@ -23,6 +31,7 @@ func _on_Area2D_body_entered(body):
 	#IF OBJECT THAT ENTERED PORTAL IS NOT A TILEMAP (NO TileMap STRING IN THE NAME OF OBJECT
 	if !("TileMap" in body.name):
 		exit_speed = body.max_velocity
+	
 		print("_on_Area2D_body_entered(): exit_speed = ", exit_speed)
 
 		#CHECK IF PLAYER(OR OBJECT) IS EXITING THE PORTAL OR ENTERING IT
@@ -30,6 +39,7 @@ func _on_Area2D_body_entered(body):
 			#WE NEED TO CHECK IF BOTH PORTALS ARE PRESENT IN THE GAME
 			if Global.PortalContainer[0] and Global.PortalContainer[1]:
 				#DECISION WHERE TO PUT OBJECT (SET ITS POSITION TO THE OTHER PORTAL SPAWN POINT)
+				print ("Entered portal type: ", self.type)
 				body.exiting_portal = true
 				body.set_global_position(Global.PortalContainer[abs(type - 1)].spawn_position)
 
@@ -37,12 +47,12 @@ func _on_Area2D_body_entered(body):
 func _on_Area2D_body_exited(body):
 	if !("TileMap" in body.name):	
 		#IF OBJECT EXITED PORTALS AREA2D IT'S NOT IN STATE exiting_portal ANYMORE
-		body.exiting_portal = false
-		
+		body.exiting_portal = false		
 		#IF SELF TYPE == 0 THEN WE NEED TO CHANGE SOME PROPERTIES OF THE OTHER PORTAL (THE ONE WITH TYPE 1)
 		#THIS IS MOST PROBLEMATIC FOR ME. I FOUND THAT THESE RULES WORKS QUITE WELL, BUT THEY SHOULD BE CHANGED
 		
 		# check the exit_direction of the other portal:
+		
 		if Global.PortalContainer[0] != null and Global.PortalContainer[1] !=null:
 			match getPortalExitDirection(Global.PortalContainer[abs(type - 1)]):
 				8:
@@ -56,8 +66,8 @@ func _on_Area2D_body_exited(body):
 					body.motion.y = 0
 				2:
 					print("entrance down: halting horizontal motion, flipping and clamping vertical motion to higher of ", exit_speed, " or 150 (not 64?)")
-					body.motion.x = 0
-				
+					Global.add_message(str("entrance down: halting horizontal motion, flipping and clamping vertical motion to higher of ", exit_speed, " or 150 (not 64?)"))
+					body.motion.x = 0								
 					body.motion.y = -clamp(exit_speed * FORCE_MULTIPLIER_Y,exit_speed,150)
 				4:
 					print("entrance left: horizontal motion is exit_speed or 64, halting vertical motion")

@@ -20,16 +20,16 @@ atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 16 )
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
 
 [resource]
 animations = [ {
@@ -38,13 +38,13 @@ animations = [ {
 "name": "default",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ) ],
-"loop": true,
-"name": "breaking",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 7 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": true,
 "name": "stand",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "breaking",
 "speed": 5.0
 } ]
