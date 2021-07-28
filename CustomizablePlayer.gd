@@ -30,6 +30,7 @@ onready var body_torso = $"Body/Torso"
 onready var body_head = $"Body/Head"
 onready var body_legs = $"Body/Legs"
 onready var body_arms = $"Body/Arms"
+onready var hat = $"Body/Hat"
 
 # let's not search for the raycast in _process(), for the same reason
 onready var raycast = $"RayCast2D"
@@ -42,17 +43,18 @@ func _ready():
 	set_colors()
 
 func set_sprite_direction():
-# TM 20210725 - optimized conditional statement
-	body_head.flip_h = position.x > get_viewport().get_mouse_position().x
-	body_torso.flip_h = position.x > get_viewport().get_mouse_position().x
-	body_arms.flip_h = position.x > get_viewport().get_mouse_position().x
-	body_legs.flip_h = position.x > get_viewport().get_mouse_position().x
+	if self.position.x < get_viewport().get_mouse_position().x:
+		$Body.scale.x  = 1
+	else:
+		$Body.scale.x  = -1
+#
 
 func set_colors():
 	body_torso.set_modulate(Playervars.player_torso_color)
 	body_head.set_modulate(Playervars.player_skin_color)
 	body_arms.set_modulate(Playervars.player_skin_color)
 	body_legs.set_modulate(Playervars.player_legs_color)
+	hat.set_modulate(Playervars.player_hat_color)
 
 func _process(delta):
 	set_colors()

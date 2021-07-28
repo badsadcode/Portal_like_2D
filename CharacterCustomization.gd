@@ -55,6 +55,7 @@ func set_model_colors():
 	das_model_legs.set_modulate(COLORS[legs_color_index])
 	Playervars.player_torso_color = COLORS[torso_color_index]
 	Playervars.player_legs_color = COLORS[legs_color_index]
+	Playervars.player_hat_color = COLORS[hat_color_index]
 	
 
 
