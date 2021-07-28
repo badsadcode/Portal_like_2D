@@ -24,7 +24,7 @@ var exiting_portal = false
 #HELPER VARIABLES 
 onready var coord = $"../Coord"
 onready var tilemap = $"../TileMap"
-var PortalObject = load("res://Portal.tscn")
+var PortalObject = load("res://scenes/portal/Portal.tscn")
 
 onready var body_torso = $"Body/Torso"
 onready var body_head = $"Body/Head"
