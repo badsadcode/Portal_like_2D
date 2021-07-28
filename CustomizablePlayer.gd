@@ -55,6 +55,12 @@ func set_colors():
 	body_arms.set_modulate(Playervars.player_skin_color)
 	body_legs.set_modulate(Playervars.player_legs_color)
 	hat.set_modulate(Playervars.player_hat_color)
+	hat.texture = load(Playervars.player_hat_model)
+	var texture_width = hat.texture.get_width()
+	var texture_height = hat.texture.get_height()
+	hat.centered = false
+	hat.set_offset(Vector2(-texture_width/2, -texture_height))
+	
 
 func _process(delta):
 	set_colors()

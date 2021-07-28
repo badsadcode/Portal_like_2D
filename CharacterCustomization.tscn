@@ -24,19 +24,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hat2" type="VBoxContainer" parent="VBoxContainer"]
+[node name="Hat_Model" type="VBoxContainer" parent="VBoxContainer"]
 margin_right = 96.0
 margin_bottom = 28.0
 custom_constants/separation = -1
 
-[node name="Label" type="Label" parent="VBoxContainer/Hat2"]
+[node name="Label" type="Label" parent="VBoxContainer/Hat_Model"]
 margin_right = 96.0
 margin_bottom = 11.0
 custom_fonts/font = ExtResource( 2 )
 text = "HAT MODEL"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Hat2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Hat_Model"]
 margin_top = 10.0
 margin_right = 96.0
 margin_bottom = 28.0
@@ -46,7 +46,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="hat_decrease_button" type="Button" parent="VBoxContainer/Hat2/HBoxContainer"]
+[node name="hat_model_decrease_button" type="Button" parent="VBoxContainer/Hat_Model/HBoxContainer"]
 margin_right = 12.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 12, 0 )
@@ -54,7 +54,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "<"
 
-[node name="Button2" type="Button" parent="VBoxContainer/Hat2/HBoxContainer"]
+[node name="Button2" type="Button" parent="VBoxContainer/Hat_Model/HBoxContainer"]
 margin_left = 16.0
 margin_right = 80.0
 margin_bottom = 18.0
@@ -63,7 +63,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 disabled = true
 
-[node name="hat_increase_button" type="Button" parent="VBoxContainer/Hat2/HBoxContainer"]
+[node name="hat_model_increase_button" type="Button" parent="VBoxContainer/Hat_Model/HBoxContainer"]
 margin_left = 84.0
 margin_right = 96.0
 margin_bottom = 18.0
@@ -198,12 +198,13 @@ rect_min_size = Vector2( 12, 0 )
 text = ">"
 
 [node name="Body" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 0.128906, 0.128906, 0.128906, 1 )
 position = Vector2( 193, 63 )
 rotation = -3.14159
 scale = Vector2( 5, -5 )
 
-[connection signal="pressed" from="VBoxContainer/Hat2/HBoxContainer/hat_decrease_button" to="." method="_on_hat_decrease_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Hat2/HBoxContainer/hat_increase_button" to="." method="_on_hat_increase_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Hat_Model/HBoxContainer/hat_model_decrease_button" to="." method="_on_hat_model_decrease_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Hat_Model/HBoxContainer/hat_model_increase_button" to="." method="_on_hat_model_increase_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Hat/HBoxContainer/hat_decrease_button" to="." method="_on_hat_decrease_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Hat/HBoxContainer/hat_increase_button" to="." method="_on_hat_increase_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Torso/HBoxContainer/torso_decrease_button" to="." method="_on_torso_decrease_button_pressed"]
