@@ -1,6 +1,7 @@
 extends Node2D
 
-onready var debug_window= $"../DebugWindow/VBoxContainer/console"
+onready var debug_window = $"../DebugWindow/VBoxContainer/console"
+onready var debug_window1 = $"../DebugWindow/VBoxContainer/better_console"
 
 var type #TYPE OF PORTAL. DEPENDING ON VALUE (0 AND 1) THE COLOR IS SET
 var spawn_position #POSITION WHERE OBJECTS WILL SPAWN WHEN EXITING THE PORTAL
@@ -16,7 +17,8 @@ const COLOR_PORTAL_1 : Color = Color(0, 0.4375, 1)		# blue portal
 
 func add_message(aMessage: String):
 	debug_window.add_text(aMessage+"\n")
-	
+	#debug_window1.text=debug_window1.text+aMessage+"\n"
+	debug_window1.insert_text_at_cursor(aMessage+"\n")	
 
 func _ready():
 	Global.connect("add_message",self,"add_message")

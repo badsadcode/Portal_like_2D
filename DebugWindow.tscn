@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/fonts/DebugWindow_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://DebugWindow.gd" type="Script" id=2]
 [ext_resource path="res://assets/RUNESCAPE_UF.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/DebugWindow_console_font.tres" type="DynamicFont" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -11,6 +12,57 @@ light_mode = 1
 size = 5
 outline_color = Color( 0.215686, 0.215686, 0.215686, 1 )
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="DynamicFont" id=5]
+size = 6
+font_data = ExtResource( 3 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 5 )
+TextEdit/colors/background_color = Color( 0, 0, 0, 0 )
+TextEdit/colors/bookmark_color = Color( 0.08, 0.49, 0.98, 1 )
+TextEdit/colors/brace_mismatch_color = Color( 1, 0.2, 0.2, 1 )
+TextEdit/colors/breakpoint_color = Color( 0.8, 0.8, 0.4, 0.2 )
+TextEdit/colors/caret_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_color = Color( 0.88, 0.88, 0.88, 1 )
+TextEdit/colors/code_folding_color = Color( 0.8, 0.8, 0.8, 0.8 )
+TextEdit/colors/completion_background_color = Color( 0.282353, 0.266667, 0.321569, 1 )
+TextEdit/colors/completion_existing_color = Color( 0.87, 0.87, 0.87, 0.13 )
+TextEdit/colors/completion_font_color = Color( 0.67, 0.67, 0.67, 1 )
+TextEdit/colors/completion_scroll_color = Color( 1, 1, 1, 1 )
+TextEdit/colors/completion_selected_color = Color( 0.337255, 0.337255, 0.356863, 1 )
+TextEdit/colors/current_line_color = Color( 0.25098, 0.25098, 0.25098, 0.807843 )
+TextEdit/colors/executing_line_color = Color( 0.2, 0.8, 0.2, 0.4 )
+TextEdit/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.88, 0.88, 0.88, 0.5 )
+TextEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+TextEdit/colors/function_color = Color( 0.4, 0.64, 0.81, 1 )
+TextEdit/colors/line_number_color = Color( 0.67, 0.67, 0.67, 0.4 )
+TextEdit/colors/mark_color = Color( 1, 0.4, 0.4, 0.4 )
+TextEdit/colors/member_variable_color = Color( 0.9, 0.31, 0.35, 1 )
+TextEdit/colors/number_color = Color( 0.92, 0.58, 0.2, 1 )
+TextEdit/colors/safe_line_number_color = Color( 0.67, 0.78, 0.67, 0.6 )
+TextEdit/colors/selection_color = Color( 0.494118, 0.647059, 0.14902, 0.694118 )
+TextEdit/colors/symbol_color = Color( 0.94, 0.94, 0.94, 1 )
+TextEdit/colors/word_highlighted_color = Color( 0.8, 0.9, 0.9, 0.15 )
+TextEdit/constants/completion_lines = 7
+TextEdit/constants/completion_max_width = 50
+TextEdit/constants/completion_scroll_width = 3
+TextEdit/constants/line_spacing = 4
+TextEdit/fonts/font = ExtResource( 4 )
+TextEdit/icons/fold = null
+TextEdit/icons/folded = null
+TextEdit/icons/space = null
+TextEdit/icons/tab = null
+TextEdit/styles/completion = null
+TextEdit/styles/focus = null
+TextEdit/styles/normal = SubResource( 6 )
+TextEdit/styles/read_only = SubResource( 7 )
 
 [node name="DebugWindow" type="Control"]
 margin_right = 256.0
@@ -22,7 +74,7 @@ __meta__ = {
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
-margin_bottom = 104.0
+margin_bottom = 119.0
 rect_min_size = Vector2( 0, 40 )
 color = Color( 0.129412, 0.129412, 0.129412, 0.454902 )
 __meta__ = {
@@ -32,6 +84,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 77.0
 custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -97,3 +150,18 @@ scroll_following = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="better_console" type="TextEdit" parent="VBoxContainer"]
+visible = false
+margin_top = 106.0
+margin_right = 256.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 0, 64 )
+theme = SubResource( 4 )
+readonly = true
+highlight_current_line = true
+show_line_numbers = true
+smooth_scrolling = true
+wrap_enabled = true
+caret_block_mode = true
+caret_blink = true
