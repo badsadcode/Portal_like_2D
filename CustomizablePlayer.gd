@@ -225,9 +225,5 @@ func deployPortals():
 		BlueDeployed = true	
 
 
-func display_info():
-	$"../Label4".text = "SPEED:"+ str(motion) + "\nMAX VELOCITY -> [X]:" + str(abs(max_velocity.x)) +"[Y]: "+ str(abs(max_velocity.y))
-#	if Global.PortalContainer[0] and Global.PortalContainer[1]:
-#		$"../Label3".text = str("Portal positions: ", Global.PortalContainer[0].position, ", ", Global.PortalContainer[1].position)
-#	else:
-#		$"../Label3".text = ""
+
+

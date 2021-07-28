@@ -7,7 +7,7 @@ var type #TYPE OF PORTAL. DEPENDING ON VALUE (0 AND 1) THE COLOR IS SET
 var spawn_position #POSITION WHERE OBJECTS WILL SPAWN WHEN EXITING THE PORTAL
 var exit_speed = 0.0
 var last_exit_speed = 0.0
-
+var enters_count = 0
 const FORCE_MULTIPLIER = 1.75
 const FORCE_MULTIPLIER_Y = 0.75
 
@@ -16,9 +16,8 @@ const COLOR_PORTAL_0 : Color = Color(1, 0.694118, 0)	# orange portal
 const COLOR_PORTAL_1 : Color = Color(0, 0.4375, 1)		# blue portal
 
 func add_message(aMessage: String):
-	debug_window.add_text(aMessage+"\n")
-	#debug_window1.text=debug_window1.text+aMessage+"\n"
-	debug_window1.insert_text_at_cursor(aMessage+"\n")	
+	debug_window.add_text(aMessage+"\n")	
+	#debug_window1.insert_text_at_cursor(aMessage+"\n")	
 
 func _ready():
 	Global.connect("add_message",self,"add_message")
@@ -33,7 +32,7 @@ func _on_Area2D_body_entered(body):
 	#IF OBJECT THAT ENTERED PORTAL IS NOT A TILEMAP (NO TileMap STRING IN THE NAME OF OBJECT
 	if !("TileMap" in body.name):
 		exit_speed = body.max_velocity
-	
+		enters_count += 1
 		print("_on_Area2D_body_entered(): exit_speed = ", exit_speed)
 
 		#CHECK IF PLAYER(OR OBJECT) IS EXITING THE PORTAL OR ENTERING IT
@@ -68,9 +67,13 @@ func _on_Area2D_body_exited(body):
 					body.motion.y = 0
 				2:
 					print("entrance down: halting horizontal motion, flipping and clamping vertical motion to higher of ", exit_speed, " or 150 (not 64?)")
-					Global.add_message(str("entrance down: halting horizontal motion, flipping and clamping vertical motion to higher of ", exit_speed, " or 150 (not 64?)"))
-					body.motion.x = 0								
-					body.motion.y = -clamp(exit_speed * FORCE_MULTIPLIER_Y,exit_speed,150)
+					#Global.add_message(str("Portal 0 exit_speed:[",Global.PortalContainer[0].exit_speed,"] Portal 1 exit_speed: [",Global.PortalContainer[1].exit_speed,"]"))
+					Global.add_message(str(self.type,"<- type || exit speed-->",exit_speed * FORCE_MULTIPLIER_Y))
+					body.motion.x = 0		
+					# THERE IS SOMETHING WRONG WITH NEXT LINE. NOW IT WORKS OK BUT WITH PREVIOUS VERSIO
+					# WHERE  SECOND PARAMETER FOR CLAMP WAS exit_speed DOUBLE TELEPORTATION HAPPEND OCCASIONALLY
+					# TODO: FIND BEST MOVEMENT PARAMETERS
+					body.motion.y = -clamp(exit_speed * FORCE_MULTIPLIER_Y,body.MAX_SPEED,150)
 				4:
 					print("entrance left: horizontal motion is exit_speed or 64, halting vertical motion")
 					body.motion.x = max(exit_speed * FORCE_MULTIPLIER, body.MAX_SPEED)
@@ -85,7 +88,7 @@ func _on_Area2D_body_exited(body):
 #					body.motion.y = 0
 #				if getPortalExitDirection(Global.PortalContainer[1]) == 2:
 #					body.motion.x = 0	
-#
+#					Global.add_message(str("Portal 0 enters_count:[",Global.PortalContainer[0].enters_count,"] Portal 1 enters_count: [",Global.PortalContainer[1].enters_count,"]"))
 #					body.motion.y = -(clamp(exit_speed * FORCE_MULTIPLIER_Y,exit_speed,150))
 #				if getPortalExitDirection(Global.PortalContainer[1]) == 4:
 #					body.motion.x = (max(exit_speed * FORCE_MULTIPLIER,64))
@@ -130,3 +133,8 @@ func getPortalExitDirection(aPortal: Node2D):
 		-90:
 			print("exit is right of portal ", aPortal.type)
 			return 4
+
+func _process(delta):
+	if Input.is_action_just_pressed("reset_enters"):
+		self.enters_count = 0
+		debug_window.clear()

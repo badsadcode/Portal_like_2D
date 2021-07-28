@@ -23,9 +23,9 @@ func _process(delta):
 	set_debug_line(debug_line3, "POSITION", player.get_global_position())
 	set_debug_line(debug_line4, "MAX VELOCITY", player.max_velocity)
 	if Global.PortalContainer[0] != null:
-		set_debug_line(debug_line5, "ORANGE PORTAL", Global.PortalContainer[0].position)
+		set_debug_line(debug_line5, "ORANGE PORTAL",  str("Position: ",Global.PortalContainer[0].position," ENTERS:",Global.PortalContainer[0].enters_count))
 	if Global.PortalContainer[1] != null:
-		set_debug_line(debug_line6, "BLUE PORTAL", Global.PortalContainer[1].position)
+		set_debug_line(debug_line6, "BLUE PORTAL", str("Position: ",Global.PortalContainer[1].position," ENTERS:",Global.PortalContainer[1].enters_count))
 	
 	if Input.is_action_just_pressed("char_customise"):
 		if !customizator:
