@@ -1,9 +1,10 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/fonts/DebugWindow_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://DebugWindow.gd" type="Script" id=2]
+[ext_resource path="res://scenes/debug/DebugWindow.gd" type="Script" id=2]
 [ext_resource path="res://assets/RUNESCAPE_UF.TTF" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/fonts/DebugWindow_console_font.tres" type="DynamicFont" id=4]
+
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
