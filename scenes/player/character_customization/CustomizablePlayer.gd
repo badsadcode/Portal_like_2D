@@ -39,8 +39,13 @@ onready var raycast = $"RayCast2D"
 # portal type constants, for code clarity
 const PORTAL_ORANGE = 0
 const PORTAL_BLUE = 1
+
+func update_apperance():
+	Playervars.update_apperance()
 func _ready():
 	set_colors()
+	Playervars.connect("update_apperance",self,"update_apperance")
+
 
 func set_sprite_direction():
 	if self.position.x < get_viewport().get_mouse_position().x:
@@ -63,11 +68,9 @@ func set_colors():
 	
 
 func _process(delta):
-	set_colors()
-	update()
-	
-	set_sprite_direction()
-	#display_info()
+	#set_colors()
+	update()	
+	set_sprite_direction()	
 	
 	#GUN RAYCAST
 	raycast.cast_to = (get_viewport().get_mouse_position() - get_global_position()) * 300
@@ -77,7 +80,6 @@ func _process(delta):
 
 func _draw():
 	#Draw line showing where player is pointing his portal gun
-# TM 20210725 - named colors for code clarity
 	var laser_glow_color : = Color(1.0, 0, 0, 1)
 	var laser_beam_color : = Color(1.4, 0.60, 0, 1)
 	draw_line(Vector2(0,0), raycast.get_collision_point() - get_global_position(), laser_glow_color, 1.25, true)
@@ -90,26 +92,24 @@ func get_max_velocity():
 		max_velocity = current_velocity
 	else:
 		max_velocity=lerp(max_velocity, MAX_SPEED, FRICTION)
-	
-			
 
 
 func _physics_process(delta):
-	get_max_velocity()
+	get_max_velocity()	
 	handle_inputs(delta)
 	motion = move_and_slide(motion, Vector2.UP, false, 4, PI/4, false)
 
-func play_animations(aAnimation: String):
-	
+
+func play_animations(aAnimation: String):	
 	body_head.play(aAnimation)
 	body_arms.play(aAnimation)
 	body_torso.play(aAnimation)
 	body_legs.play(aAnimation)
 
+
 func handle_inputs(aDelta):	
 	#APPLY GRAVITY
 	motion.y += GRAVITY  * aDelta
-	play_animations("run")
 	
 	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")	
 	if x_input != 0:
