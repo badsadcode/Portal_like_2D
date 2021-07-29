@@ -192,6 +192,86 @@ margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 text = ">"
 
+[node name="Laser_Beam" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 96.0
+margin_bottom = 86.0
+custom_constants/separation = -1
+
+[node name="Label" type="Label" parent="VBoxContainer/Laser_Beam"]
+margin_right = 96.0
+margin_bottom = 7.0
+text = "LASER BEAM"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Laser_Beam"]
+margin_top = 6.0
+margin_right = 96.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="laser_beam_decrease_button" type="Button" parent="VBoxContainer/Laser_Beam/HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 12, 0 )
+text = "<"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Laser_Beam/HBoxContainer"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 64, 0 )
+disabled = true
+
+[node name="laser_beam_increase_button" type="Button" parent="VBoxContainer/Laser_Beam/HBoxContainer"]
+margin_left = 84.0
+margin_right = 96.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 12, 0 )
+text = ">"
+
+[node name="Laser_Glow" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 90.0
+margin_right = 96.0
+margin_bottom = 104.0
+custom_constants/separation = -1
+
+[node name="Label" type="Label" parent="VBoxContainer/Laser_Glow"]
+margin_right = 96.0
+margin_bottom = 7.0
+text = "LASER GLOW"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Laser_Glow"]
+margin_top = 6.0
+margin_right = 96.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="laser_glow_decrease_button" type="Button" parent="VBoxContainer/Laser_Glow/HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 12, 0 )
+text = "<"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Laser_Glow/HBoxContainer"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 64, 0 )
+disabled = true
+
+[node name="laser_glow_increase_button" type="Button" parent="VBoxContainer/Laser_Glow/HBoxContainer"]
+margin_left = 84.0
+margin_right = 96.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 12, 0 )
+text = ">"
+
 [node name="Body" parent="." instance=ExtResource( 3 )]
 self_modulate = Color( 0.128906, 0.128906, 0.128906, 1 )
 position = Vector2( 193, 63 )
@@ -206,3 +286,7 @@ scale = Vector2( 5, -5 )
 [connection signal="pressed" from="VBoxContainer/Torso/HBoxContainer/torso_increase_button" to="." method="_on_torso_increase_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Pants/HBoxContainer/legs_decrease_button" to="." method="_on_legs_decrease_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Pants/HBoxContainer/legs_increase_button" to="." method="_on_legs_increase_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Laser_Beam/HBoxContainer/laser_beam_decrease_button" to="." method="_on_laser_beam_decrease_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Laser_Beam/HBoxContainer/laser_beam_increase_button" to="." method="_on_laser_beam_increase_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Laser_Glow/HBoxContainer/laser_glow_decrease_button" to="." method="_on_laser_glow_decrease_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Laser_Glow/HBoxContainer/laser_glow_increase_button" to="." method="_on_laser_glow_increase_button_pressed"]

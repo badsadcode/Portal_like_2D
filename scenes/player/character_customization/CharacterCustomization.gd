@@ -1,6 +1,14 @@
 extends Control
 
 
+onready var laser_beam_increase = $"VBoxContainer/Laser_Beam/HBoxContainer/laser_beam_increase_button"
+onready var laser_beam_color_button = $"VBoxContainer/Laser_Beam/HBoxContainer/Button2"
+onready var laser_beam_decrease = $"VBoxContainer/Laser_Beam/HBoxContainer/laser_beam_decrease_button"
+
+onready var laser_glow_increase = $"VBoxContainer/Laser_Glow/HBoxContainer/laser_glow_increase_button"
+onready var laser_glow_color_button = $"VBoxContainer/Laser_Glow/HBoxContainer/Button2"
+onready var laser_glow_decrease = $"VBoxContainer/Laser_Glow/HBoxContainer/laser_glow_decrease_button"
+
 onready var hat_increase = $"VBoxContainer/Hat/HBoxContainer/hat_decrease_button"
 onready var hat_color_button = $"VBoxContainer/Hat/HBoxContainer/Button2"
 onready var hat_decrease = $"VBoxContainer/Hat/HBoxContainer/hat_increase_button"
@@ -16,6 +24,8 @@ onready var legs_decrease = $"VBoxContainer/Pants/HBoxContainer/legs_decrease_bu
 onready var hat_style_override = hat_color_button.get_stylebox("disabled").duplicate()
 onready var torso_style_override = torso_color_button.get_stylebox("disabled").duplicate()
 onready var legs_style_override = legs_color_button.get_stylebox("disabled").duplicate()
+onready var laser_glow_style_override = laser_glow_color_button.get_stylebox("disabled").duplicate()
+onready var laser_beam_style_override = laser_beam_color_button.get_stylebox("disabled").duplicate()
 
 onready var hat_model_decrease = $"VBoxContainer/Hat_Model/HBoxContainer/hat_model_decrease_button"
 onready var hat_model_button = $"VBoxContainer/Hat_Model/HBoxContainer/Button2"
@@ -34,18 +44,21 @@ var hat_color_index = 0
 var torso_color_index = 0
 var legs_color_index = 0
 var hat_model_index = 0
+var laser_beam_color_index = 0
+var laser_glow_color_index = 0
+
 
 var original_position = Vector2()
 
 signal color_change
 signal hat_model_change
 
-const HAT_MODELS = ["res://assets/player_sprites/hat_no_hat.png",
-					"res://assets/player_sprites/hat_fedora.png",
-					"res://assets/player_sprites/hat_cylinder.png",
-					"res://assets/player_sprites/hat_bandana.png",
-					"res://assets/player_sprites/hat_bandana2.png",
-					"res://assets/player_sprites/hat_johnny_bravo.png",
+const HAT_MODELS = [["res://assets/player_sprites/hat_no_hat.png","NO HAT"],
+					["res://assets/player_sprites/hat_fedora.png","FEDORA"],
+					["res://assets/player_sprites/hat_cylinder.png","CYLINDER"],
+					["res://assets/player_sprites/hat_bandana.png","BANDANA"],
+					["res://assets/player_sprites/hat_bandana2.png","BANDANA 2"],
+					["res://assets/player_sprites/hat_johnny_bravo.png","JOHNNY"],
 					
 					]
 
@@ -70,6 +83,8 @@ func _ready():
 	set_color(hat_color_button, hat_style_override, hat_color_index)
 	set_color(torso_color_button, torso_style_override, torso_color_index)
 	set_color(legs_color_button, legs_style_override, legs_color_index)
+	set_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
+	set_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
 	set_model()
 
 
@@ -83,12 +98,13 @@ func set_model_colors():
 
 
 func set_model():
-	das_model_hat.texture = load(HAT_MODELS[hat_model_index])
+	das_model_hat.texture = load(HAT_MODELS[hat_model_index][0])
 	var texture_width = das_model_hat.texture.get_width()
 	var texture_height = das_model_hat.texture.get_height()		
 	das_model_hat.centered = false	
 	das_model_hat.set_offset(Vector2(-texture_width/2, -texture_height))	
-	Playervars.player_hat_model = HAT_MODELS[hat_model_index]	
+	Playervars.player_hat_model = HAT_MODELS[hat_model_index][0]
+	hat_model_button.text = HAT_MODELS[hat_model_index][1]
 
 
 func increase_index(aArray, aIndex):
@@ -163,6 +179,7 @@ func _on_legs_increase_button_pressed():
 
 func _on_hat_model_decrease_button_pressed():
 	hat_model_index = decrease_index(HAT_MODELS, hat_model_index)
+	hat_model_button.text = HAT_MODELS[hat_model_index][1]
 	emit_signal("hat_model_change")
 	Playervars.emit_signal("update_appearance")
 	hat_model_decrease.release_focus()
@@ -170,6 +187,33 @@ func _on_hat_model_decrease_button_pressed():
 
 func _on_hat_model_increase_button_pressed():
 	hat_model_index = increase_index(HAT_MODELS, hat_model_index)
+	hat_model_button.text = HAT_MODELS[hat_model_index][1]
 	emit_signal("hat_model_change")
 	Playervars.emit_signal("update_appearance")
 	hat_model_increase.release_focus()
+
+
+func _on_laser_glow_increase_button_pressed():
+	laser_glow_color_index = increase_index(COLORS,laser_glow_color_index)
+	set_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
+	Playervars.laser_glow_color = COLORS[laser_glow_color_index]
+	
+
+
+func _on_laser_glow_decrease_button_pressed():
+	laser_glow_color_index = decrease_index(COLORS,laser_glow_color_index)
+	set_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
+	Playervars.laser_glow_color = COLORS[laser_glow_color_index]
+	
+
+
+func _on_laser_beam_increase_button_pressed():
+	laser_beam_color_index = increase_index(COLORS,laser_beam_color_index)
+	set_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
+	Playervars.laser_beam_color = COLORS[laser_beam_color_index]
+
+
+func _on_laser_beam_decrease_button_pressed():
+	laser_beam_color_index = decrease_index(COLORS,laser_beam_color_index)
+	set_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
+	Playervars.laser_beam_color = COLORS[laser_beam_color_index]

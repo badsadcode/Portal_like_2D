@@ -24,6 +24,9 @@ var exiting_portal = false
 #HELPER VARIABLES 
 onready var coord = $"../Coord"
 onready var tilemap = $"../TileMap"
+onready var laser_beam = $"Laser_Beam"
+onready var laser_glow = $"Laser_Glow"
+onready var laser_beam_particles = $"Laser_Beam/Laser_Beam_Particles"
 var PortalObject = load("res://scenes/portal/Portal.tscn")
 
 onready var body_torso = $"Body/Torso"
@@ -53,9 +56,7 @@ func set_sprite_direction():
 		$Body.scale.x  = -1
 
 
-func _process(delta):
-	
-	update()	
+func _process(delta):	
 	set_sprite_direction()	
 	
 	#GUN RAYCAST
@@ -63,13 +64,25 @@ func _process(delta):
 	setTilePointer(coord, raycast, tilemap)
 	deployPortals()
 
+func point_laser_beam():
+	var cast_point = to_local(raycast.get_collision_point())
+	laser_beam_particles.position = cast_point * 0.5 
+	laser_beam_particles.rotation = (laser_beam.points[0] - cast_point).angle()
+	laser_beam_particles.process_material.emission_box_extents.x = cast_point.length() * 0.5
+	laser_beam_particles.process_material.emission_box_extents.y = 0.3
+	laser_beam.default_color = Playervars.laser_beam_color
+	laser_glow.default_color = Playervars.laser_glow_color
+	laser_beam.points[1] = cast_point
+	laser_glow.points[1] = cast_point
 
-func _draw():
-	#Draw line showing where player is pointing his portal gun
-	var laser_glow_color : = Color(1.0, 0, 0, 1)
-	var laser_beam_color : = Color(1.4, 0.60, 0, 1)
-	draw_line(Vector2(0,0), raycast.get_collision_point() - get_global_position(), laser_glow_color, 1.25, true)
-	draw_line(Vector2(0,0), raycast.get_collision_point() - get_global_position(), laser_beam_color, 1.0, true)
+#func _draw():
+#	#Draw line showing where player is pointing his portal gun
+#	var laser_glow_color = Playervars.laser_glow_color
+#	var laser_beam_color = Playervars.laser_beam_color
+#	laser_glow_color.a = 0.3
+#	laser_beam_color.a = 0.9
+#	draw_line(Vector2(0,0), raycast.get_collision_point() - get_global_position(), laser_glow_color, 1.25, true)
+#	draw_line(Vector2(0,0), raycast.get_collision_point() - get_global_position(), laser_beam_color, 1.0, true)
 
 
 func get_max_velocity():
@@ -81,6 +94,7 @@ func get_max_velocity():
 
 
 func _physics_process(delta):
+	point_laser_beam()
 	get_max_velocity()	
 	handle_inputs(delta)
 	motion = move_and_slide(motion, Vector2.UP, false, 4, PI/4, false)

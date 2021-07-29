@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/world/World.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/panel_tile.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/player/character_customization/CharacterCustomization.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/world/Coord.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/debug/DebugWindow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/world/world_environment.tres" type="Environment" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -698,7 +699,7 @@ tile_data = PoolIntArray( 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65552, 0, 0, 13
 [node name="Coord" parent="." instance=ExtResource( 6 )]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.831373, 0.831373, 0.831373, 1 )
+color = Color( 0.505882, 0.505882, 0.505882, 1 )
 
 [node name="DebugWindow" parent="." instance=ExtResource( 7 )]
 margin_left = 2.65165
@@ -714,3 +715,6 @@ margin_left = -1.5
 margin_top = -152.0
 margin_right = -1.5
 margin_bottom = -152.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 8 )
