@@ -1,0 +1,151 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/themes/menu_default.theme" type="Theme" id=1]
+
+[node name="ThemeTester" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.156933
+margin_right = -4.0
+margin_bottom = 0.156937
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 80.0
+margin_bottom = 7.0
+text = "SAMPLE UPPER CASE TEXT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+margin_top = 11.0
+margin_right = 80.0
+margin_bottom = 18.0
+text = "sample lower case text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+margin_top = 22.0
+margin_right = 80.0
+margin_bottom = 29.0
+text = "Sample Capitalized Text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_top = 31.0
+margin_right = 99.0
+margin_bottom = 71.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+margin_right = 142.0
+margin_bottom = 8.0
+
+[node name="Button" type="Button" parent="VBoxContainer2/HBoxContainer"]
+margin_right = 54.0
+margin_bottom = 8.0
+focus_mode = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "SAMPLE BUTTON"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 58.0
+margin_right = 66.0
+margin_bottom = 8.0
+focus_mode = 1
+text = "<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button4" type="Button" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 70.0
+margin_right = 92.0
+margin_bottom = 8.0
+focus_mode = 1
+text = "value"
+
+[node name="Button5" type="Button" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 96.0
+margin_right = 104.0
+margin_bottom = 8.0
+focus_mode = 1
+text = ">"
+
+[node name="Button6" type="Button" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 108.0
+margin_right = 142.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 33.157, 0 )
+focus_mode = 0
+disabled = true
+enabled_focus_mode = 1
+text = "DISABLED"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -26.0
+margin_right = -1.0
+margin_bottom = 71.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="VBoxContainer3"]
+margin_right = 251.0
+margin_bottom = 8.0
+focus_mode = 1
+text = "Sample Button"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer3"]
+margin_top = 12.0
+margin_right = 251.0
+margin_bottom = 87.0
+rect_min_size = Vector2( 0, 75 )
+bbcode_enabled = true
+bbcode_text = "Sample RichTextLable
+[color=red]GREEN COLOR TEST[/color]
+[color=green]BLUE COLOR TEST[/color]
+[color=blue]RED COLOR TEST[/color]
+Nightmare for color blind people
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. "
+text = "Sample RichTextLable
+GREEN COLOR TEST
+BLUE COLOR TEST
+RED COLOR TEST
+Nightmare for color blind people
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. "

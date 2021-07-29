@@ -40,11 +40,10 @@ onready var raycast = $"RayCast2D"
 const PORTAL_ORANGE = 0
 const PORTAL_BLUE = 1
 
-func update_apperance():
-	Playervars.update_apperance()
-func _ready():
-	set_colors()
-	Playervars.connect("update_apperance",self,"update_apperance")
+
+
+func _ready():	
+	Playervars.connect("update_appearance",self,"update_appearance")
 
 
 func set_sprite_direction():
@@ -52,23 +51,10 @@ func set_sprite_direction():
 		$Body.scale.x  = 1
 	else:
 		$Body.scale.x  = -1
-#
 
-func set_colors():
-	body_torso.set_modulate(Playervars.player_torso_color)
-	body_head.set_modulate(Playervars.player_skin_color)
-	body_arms.set_modulate(Playervars.player_skin_color)
-	body_legs.set_modulate(Playervars.player_legs_color)
-	hat.set_modulate(Playervars.player_hat_color)
-	hat.texture = load(Playervars.player_hat_model)
-	var texture_width = hat.texture.get_width()
-	var texture_height = hat.texture.get_height()
-	hat.centered = false
-	hat.set_offset(Vector2(-texture_width/2, -texture_height))
-	
 
 func _process(delta):
-	#set_colors()
+	
 	update()	
 	set_sprite_direction()	
 	
@@ -232,6 +218,9 @@ func deployPortals():
 		owner.add_child(Global.PortalContainer[1])
 		BlueDeployed = true	
 
+
+func update_appearance():
+	Playervars.update_appearance()
 
 
 
