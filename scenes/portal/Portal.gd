@@ -58,7 +58,7 @@ func _on_Area2D_body_exited(body):
 			match getPortalExitDirection(Global.PortalContainer[abs(type - 1)]):
 				8:
 					print("entrance up: halting horizontal motion, vertical motion is unaffected")
-					body.motion.x = 0
+					#body.motion.x = 0
 					body.motion.y = 0 #PREVENTS PLAYER BEING THROWN AGAIN INTO PORTAL WHICH HE'S EXITING
 				6:
 					print("entrance right: setting horizontal motion to the higher of ", exit_speed, " or ", body.MAX_SPEED, " and reversing it")
@@ -69,7 +69,7 @@ func _on_Area2D_body_exited(body):
 					print("entrance down: halting horizontal motion, flipping and clamping vertical motion to higher of ", exit_speed, " or 150 (not 64?)")
 					#Global.add_message(str("Portal 0 exit_speed:[",Global.PortalContainer[0].exit_speed,"] Portal 1 exit_speed: [",Global.PortalContainer[1].exit_speed,"]"))
 					Global.add_message(str(self.type,"<- type || exit speed-->",exit_speed * FORCE_MULTIPLIER_Y))
-					body.motion.x = 0		
+					#body.motion.x = 0		
 					# THERE IS SOMETHING WRONG WITH NEXT LINE. NOW IT WORKS OK BUT WITH PREVIOUS VERSIO
 					# WHERE  SECOND PARAMETER FOR CLAMP WAS exit_speed DOUBLE TELEPORTATION HAPPEND OCCASIONALLY
 					# TODO: FIND BEST MOVEMENT PARAMETERS

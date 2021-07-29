@@ -197,6 +197,7 @@ func _on_laser_glow_increase_button_pressed():
 	laser_glow_color_index = increase_index(COLORS,laser_glow_color_index)
 	set_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
 	Playervars.laser_glow_color = COLORS[laser_glow_color_index]
+	Playervars.emit_signal("update_appearance")
 	
 
 
@@ -204,16 +205,17 @@ func _on_laser_glow_decrease_button_pressed():
 	laser_glow_color_index = decrease_index(COLORS,laser_glow_color_index)
 	set_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
 	Playervars.laser_glow_color = COLORS[laser_glow_color_index]
-	
+	Playervars.emit_signal("update_appearance")
 
 
 func _on_laser_beam_increase_button_pressed():
 	laser_beam_color_index = increase_index(COLORS,laser_beam_color_index)
 	set_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
 	Playervars.laser_beam_color = COLORS[laser_beam_color_index]
-
+	Playervars.emit_signal("update_appearance")
 
 func _on_laser_beam_decrease_button_pressed():
 	laser_beam_color_index = decrease_index(COLORS,laser_beam_color_index)
 	set_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
 	Playervars.laser_beam_color = COLORS[laser_beam_color_index]
+	Playervars.emit_signal("update_appearance")

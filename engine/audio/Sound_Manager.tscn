@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="Sound_Manager" type="Node"]
+
+[node name="SFX_Stream" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
+
+[node name="MUSIC_Stream" type="AudioStreamPlayer" parent="."]
+bus = "MUSIC"

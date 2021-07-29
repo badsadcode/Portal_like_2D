@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 
 Global="*res://scenes/world/Global.gd"
 Playervars="*res://scenes/player/playervars.gd"
+SoundManager="*res://engine/audio/Sound_Manager.tscn"
 
 [display]
 
