@@ -19,6 +19,7 @@ onready var player_head = player.get_node("Body/Head")
 onready var player_torso = player.get_node("Body/Torso")
 onready var player_arms = player.get_node("Body/Arms")
 onready var player_legs = player.get_node("Body/Legs")
+onready var player_laser_particles = player.get_node("Laser_Beam/Laser_Beam_Particles")
 var player_hat_model = "res://assets/player_sprites/hat_no_hat.png"
 
 
@@ -29,7 +30,7 @@ func update_appearance():
 	var texture_height = player_hat.texture.get_height()	
 	player_hat.centered = false	
 	player_hat.set_offset(Vector2(-texture_width/2, -texture_height))	
-
+	player_laser_particles.process_material.color_ramp
 	player_hat.modulate = player_hat_color
 	player_torso.modulate = player_torso_color
 	player_legs.modulate = player_legs_color
