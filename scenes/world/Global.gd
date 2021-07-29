@@ -31,6 +31,7 @@ func _ready():
 		reset_config_file()
 	else:
 		set_keybinds()
+	print("domel",set_player_colors())
 
 # CONFIG FILE HANDLING
 func reset_config_file():
@@ -62,7 +63,13 @@ func load_player_colors():
 	return player_colors
 
 func set_player_colors():
-	pass
+	var loaded_player_colors = load_player_colors()
+	var key_value
+	for key in loaded_player_colors.keys():
+		key_value = loaded_player_colors[key]
+	return key_value
+
+	
 	
 
 
