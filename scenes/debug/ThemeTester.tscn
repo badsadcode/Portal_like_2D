@@ -55,7 +55,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
-margin_right = 142.0
+margin_right = 204.0
 margin_bottom = 8.0
 
 [node name="Button" type="Button" parent="VBoxContainer2/HBoxContainer"]
@@ -110,13 +110,21 @@ anchor_bottom = 0.5
 margin_top = -26.0
 margin_right = -1.0
 margin_bottom = 71.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="VBoxContainer3"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer3"]
 margin_right = 251.0
-margin_bottom = 8.0
+margin_bottom = 12.0
+text = "LineEdit"
+
+[node name="Button2" type="Button" parent="VBoxContainer3"]
+margin_top = 16.0
+margin_right = 251.0
+margin_bottom = 24.0
 focus_mode = 1
 text = "Sample Button"
 __meta__ = {
@@ -124,10 +132,13 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer3"]
-margin_top = 12.0
+margin_top = 28.0
 margin_right = 251.0
-margin_bottom = 87.0
+margin_bottom = 103.0
 rect_min_size = Vector2( 0, 75 )
+focus_mode = 2
+size_flags_horizontal = 9
+size_flags_vertical = 9
 bbcode_enabled = true
 bbcode_text = "Sample RichTextLable
 [color=red]GREEN COLOR TEST[/color]
@@ -149,3 +160,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus qui
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, risus quis accumsan suscipit, nisl sapien tempor nisl, at bibendum ipsum mauris aliquam est. Vivamus sagittis est tellus, ut lobortis orci tempus a. Nullam accumsan justo sed quam rutrum, sed blandit lectus molestie. "
+selection_enabled = true
