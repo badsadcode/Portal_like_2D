@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/player/character_customization/CharacterCustomization.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/label_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/player_sprites/char_body.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/fonts/THEME_CharacterCustomization.tres" type="Theme" id=4]
+[ext_resource path="res://assets/themes/menu_default.theme" type="Theme" id=4]
 
 [node name="CharacterCustomization" type="Control"]
 anchor_right = 1.0
@@ -26,20 +25,19 @@ __meta__ = {
 
 [node name="Hat_Model" type="VBoxContainer" parent="VBoxContainer"]
 margin_right = 96.0
-margin_bottom = 28.0
+margin_bottom = 14.0
 custom_constants/separation = -1
 
 [node name="Label" type="Label" parent="VBoxContainer/Hat_Model"]
 margin_right = 96.0
-margin_bottom = 11.0
-custom_fonts/font = ExtResource( 2 )
+margin_bottom = 7.0
 text = "HAT MODEL"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Hat_Model"]
-margin_top = 10.0
+margin_top = 6.0
 margin_right = 96.0
-margin_bottom = 28.0
+margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -48,7 +46,7 @@ __meta__ = {
 
 [node name="hat_model_decrease_button" type="Button" parent="VBoxContainer/Hat_Model/HBoxContainer"]
 margin_right = 12.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -57,7 +55,7 @@ text = "<"
 [node name="Button2" type="Button" parent="VBoxContainer/Hat_Model/HBoxContainer"]
 margin_left = 16.0
 margin_right = 80.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 64, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -66,29 +64,28 @@ disabled = true
 [node name="hat_model_increase_button" type="Button" parent="VBoxContainer/Hat_Model/HBoxContainer"]
 margin_left = 84.0
 margin_right = 96.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = ">"
 
 [node name="Hat" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 32.0
+margin_top = 18.0
 margin_right = 96.0
-margin_bottom = 60.0
+margin_bottom = 32.0
 custom_constants/separation = -1
 
 [node name="Label" type="Label" parent="VBoxContainer/Hat"]
 margin_right = 96.0
-margin_bottom = 11.0
-custom_fonts/font = ExtResource( 2 )
+margin_bottom = 7.0
 text = "HAT"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Hat"]
-margin_top = 10.0
+margin_top = 6.0
 margin_right = 96.0
-margin_bottom = 28.0
+margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -97,103 +94,101 @@ __meta__ = {
 
 [node name="hat_decrease_button" type="Button" parent="VBoxContainer/Hat/HBoxContainer"]
 margin_right = 12.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 text = "<"
 
 [node name="Button2" type="Button" parent="VBoxContainer/Hat/HBoxContainer"]
 margin_left = 16.0
 margin_right = 80.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 64, 0 )
 disabled = true
 
 [node name="hat_increase_button" type="Button" parent="VBoxContainer/Hat/HBoxContainer"]
 margin_left = 84.0
 margin_right = 96.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 text = ">"
 
 [node name="Torso" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 64.0
+margin_top = 36.0
 margin_right = 96.0
-margin_bottom = 92.0
+margin_bottom = 50.0
 custom_constants/separation = -1
 
 [node name="Label" type="Label" parent="VBoxContainer/Torso"]
 margin_right = 96.0
-margin_bottom = 11.0
-custom_fonts/font = ExtResource( 2 )
+margin_bottom = 7.0
 text = "TORSO"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Torso"]
-margin_top = 10.0
+margin_top = 6.0
 margin_right = 96.0
-margin_bottom = 28.0
+margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="torso_decrease_button" type="Button" parent="VBoxContainer/Torso/HBoxContainer"]
 margin_right = 12.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 text = "<"
 
 [node name="Button2" type="Button" parent="VBoxContainer/Torso/HBoxContainer"]
 margin_left = 16.0
 margin_right = 80.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 64, 0 )
 disabled = true
 
 [node name="torso_increase_button" type="Button" parent="VBoxContainer/Torso/HBoxContainer"]
 margin_left = 84.0
 margin_right = 96.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 text = ">"
 
 [node name="Pants" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 96.0
+margin_top = 54.0
 margin_right = 96.0
-margin_bottom = 124.0
+margin_bottom = 68.0
 custom_constants/separation = -1
 
 [node name="Label" type="Label" parent="VBoxContainer/Pants"]
 margin_right = 96.0
-margin_bottom = 11.0
-custom_fonts/font = ExtResource( 2 )
+margin_bottom = 7.0
 text = "PANTS"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Pants"]
-margin_top = 10.0
+margin_top = 6.0
 margin_right = 96.0
-margin_bottom = 28.0
+margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="legs_decrease_button" type="Button" parent="VBoxContainer/Pants/HBoxContainer"]
 margin_right = 12.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 text = "<"
 
 [node name="Button2" type="Button" parent="VBoxContainer/Pants/HBoxContainer"]
 margin_left = 16.0
 margin_right = 80.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 64, 0 )
 disabled = true
 
 [node name="legs_increase_button" type="Button" parent="VBoxContainer/Pants/HBoxContainer"]
 margin_left = 84.0
 margin_right = 96.0
-margin_bottom = 18.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 text = ">"
 

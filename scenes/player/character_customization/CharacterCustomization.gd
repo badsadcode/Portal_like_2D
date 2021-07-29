@@ -49,6 +49,7 @@ const HAT_MODELS = ["res://assets/player_sprites/hat_no_hat.png",
 					
 					]
 
+
 const COLORS = [Color(1.0, 1.0, 1.0),	#WHITE
 				Color(0.75, 0.076172, 0.076172),	# RED 
 				Color(0.365707, 0.75, 0.076172),	# GREEN
@@ -61,6 +62,7 @@ const COLORS = [Color(1.0, 1.0, 1.0),	#WHITE
 				Color(0.128906, 0.128906, 0.128906), #BLACK AS A NIGHT
 				]
 
+
 func _ready():
 	original_position = self.get_global_position()
 	self.connect("color_change",self,"set_model_colors")	
@@ -70,6 +72,7 @@ func _ready():
 	set_color(legs_color_button, legs_style_override, legs_color_index)
 	set_model()
 
+
 func set_model_colors():	
 	das_model_torso.set_modulate(COLORS[torso_color_index])
 	das_model_legs.set_modulate(COLORS[legs_color_index])
@@ -77,20 +80,15 @@ func set_model_colors():
 	Playervars.player_torso_color = COLORS[torso_color_index]
 	Playervars.player_legs_color = COLORS[legs_color_index]
 	Playervars.player_hat_color = COLORS[hat_color_index]
-	
+
+
 func set_model():
 	das_model_hat.texture = load(HAT_MODELS[hat_model_index])
 	var texture_width = das_model_hat.texture.get_width()
-	var texture_height = das_model_hat.texture.get_height()
-	
-	das_model_hat.centered = false
-	
-	das_model_hat.set_offset(Vector2(-texture_width/2, -texture_height))
-	print ("texture_width ",texture_width)
-	print ("texture_offsetx ",das_model_hat.get_offset().x)
+	var texture_height = das_model_hat.texture.get_height()		
+	das_model_hat.centered = false	
+	das_model_hat.set_offset(Vector2(-texture_width/2, -texture_height))	
 	Playervars.player_hat_model = HAT_MODELS[hat_model_index]	
-	print (hat_model_index, " MODEL INDEX")
-
 
 
 func increase_index(aArray, aIndex):
@@ -112,7 +110,7 @@ func decrease_index(aArray, aIndex):
 
 func set_color(aObject,aOverride, aIndex):	
 	aObject.text = str(aIndex)
-	aOverride.bg_color = COLORS[aIndex]
+	aOverride.set_modulate(COLORS[aIndex])
 	aObject.add_stylebox_override("disabled",aOverride)
 
 
@@ -120,7 +118,7 @@ func _on_hat_increase_button_pressed():
 	hat_color_index = increase_index(COLORS,hat_color_index)
 	set_color(hat_color_button, hat_style_override, hat_color_index)
 	emit_signal("color_change")
-	Playervars.emit_signal("update_apperance")
+	Playervars.emit_signal("update_appearance")
 	hat_increase.release_focus()
 
 
@@ -128,7 +126,7 @@ func _on_hat_decrease_button_pressed():
 	hat_color_index = decrease_index(COLORS,hat_color_index)	
 	set_color(hat_color_button, hat_style_override, hat_color_index)
 	emit_signal("color_change")
-	Playervars.emit_signal("update_apperance")
+	Playervars.emit_signal("update_appearance")
 	hat_decrease.release_focus()
 
 
@@ -136,7 +134,7 @@ func _on_torso_decrease_button_pressed():
 	torso_color_index = decrease_index(COLORS,torso_color_index)	
 	set_color(torso_color_button, torso_style_override, torso_color_index)
 	emit_signal("color_change")
-	Playervars.emit_signal("update_apperance")
+	Playervars.emit_signal("update_appearance")
 	torso_decrease.release_focus()
 
 
@@ -144,7 +142,7 @@ func _on_torso_increase_button_pressed():
 	torso_color_index = increase_index(COLORS,torso_color_index)	
 	set_color(torso_color_button, torso_style_override, torso_color_index)
 	emit_signal("color_change")
-	Playervars.emit_signal("update_apperance")
+	Playervars.emit_signal("update_appearance")
 	torso_increase.release_focus()
 
 
@@ -152,26 +150,26 @@ func _on_legs_decrease_button_pressed():
 	legs_color_index = decrease_index(COLORS,legs_color_index)	
 	set_color(legs_color_button, legs_style_override, legs_color_index)
 	emit_signal("color_change")
-	Playervars.emit_signal("update_apperance")
+	Playervars.emit_signal("update_appearance")
 	legs_decrease.release_focus()
 
 func _on_legs_increase_button_pressed():	
 	legs_color_index = increase_index(COLORS,legs_color_index)	
 	set_color(legs_color_button, legs_style_override, legs_color_index)
 	emit_signal("color_change")
-	Playervars.emit_signal("update_apperance")
+	Playervars.emit_signal("update_appearance")
 	legs_increase.release_focus()
 
 
 func _on_hat_model_decrease_button_pressed():
 	hat_model_index = decrease_index(HAT_MODELS, hat_model_index)
 	emit_signal("hat_model_change")
-	Playervars.emit_signal("update_apperance")
+	Playervars.emit_signal("update_appearance")
 	hat_model_decrease.release_focus()
 
 
 func _on_hat_model_increase_button_pressed():
 	hat_model_index = increase_index(HAT_MODELS, hat_model_index)
 	emit_signal("hat_model_change")
-	Playervars.emit_signal("update_apperance")
+	Playervars.emit_signal("update_appearance")
 	hat_model_increase.release_focus()
