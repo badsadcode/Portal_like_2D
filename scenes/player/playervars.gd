@@ -1,11 +1,21 @@
 extends Node
 
 var default_player_colors =	{
+	'player_hat_model':"res://assets/player_sprites/hats/hat_no_hat.png",
 	'player_torso_color':Color(1.0, 1.0, 1.0, 1.0),
 	'player_legs_color':Color(1.0, 1.0, 1.0, 1.0),
 	'player_skin_color':Color(1.0, 1.0, 1.0, 1.0),
 	'player_hat_color':Color(1.0, 1.0, 1.0, 1.0),
 	'player_laser_color':Color(1.0, 1.0, 1.0, 1.0),	
+	}
+	
+var current_player_colors = {
+	'player_hat_model':"res://assets/player_sprites/hats/hat_no_hat.png",
+	"player_hat_color":Color(1.0, 1.0, 1.0, 1.0),
+	"player_skin_color":Color(2.0, 1.0, 1.0, 1.0),
+	"player_torso_color":Color(3.0, 1.0, 1.0, 1.0),
+	"player_legs_color":Color(4.0, 1.0, 1.0, 1.0),
+	"player_laser_color":Color(5.0, 1.0, 1.0, 1.0),	
 	}
 
 var player_torso_color = Color(1.0, 1.0, 1.0, 1.0)

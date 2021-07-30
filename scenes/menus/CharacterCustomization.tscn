@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/player/character_customization/CharacterCustomization.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menus/CharacterCustomization.gd" type="Script" id=1]
 [ext_resource path="res://assets/player_sprites/char_body.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/themes/menu_default.theme" type="Theme" id=4]
 
@@ -16,9 +16,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
-margin_top = 4.0
+margin_top = 10.0
 margin_right = 104.0
-margin_bottom = 126.0
+margin_bottom = 132.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -274,9 +274,9 @@ text = ">"
 
 [node name="Body" parent="." instance=ExtResource( 3 )]
 self_modulate = Color( 0.128906, 0.128906, 0.128906, 1 )
-position = Vector2( 193, 63 )
+position = Vector2( 193, 62.7773 )
 rotation = -3.14159
-scale = Vector2( 5, -5 )
+scale = Vector2( 3, -3 )
 
 [connection signal="pressed" from="VBoxContainer/Hat_Model/HBoxContainer/hat_model_decrease_button" to="." method="_on_hat_model_decrease_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Hat_Model/HBoxContainer/hat_model_increase_button" to="." method="_on_hat_model_increase_button_pressed"]

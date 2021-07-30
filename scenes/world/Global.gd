@@ -1,53 +1,89 @@
 extends Node
 
-# ARRAY TO STORE INFO ABOUT PORTALS
-var PortalContainer = []
 const TILE_SIZE = 8
 
-# SETTINGS/CONFIG
-var config_file_name = "config.ini"
-var config_file
 
-# DEFAULT KEYBINDS
-var default_keybinds = {
-	'left':KEY_A,	
-	'right': KEY_D,	
+const DEFAULT_PLAYER_COLORS = {
+	"player_hat_model":"res://assets/player_sprites/hat_no_hat.png",
+	"player_hat_color":Color(1.0, 1.0, 1.0, 1.0),
+	"player_skin_color":Color(1.0, 1.0, 1.0, 1.0),
+	"player_torso_color":Color(1.0, 1.0, 1.0, 1.0),
+	"player_legs_color":Color(1.0, 1.0, 1.0, 1.0),
+	"player_laser_beam_color":Color(1.0, 1.0, 1.0, 1.0),	
+	"player_laser_glow_color":Color(1.0, 1.0, 1.0, 1.0),	
+	}
+
+const DEFAULT_KEYBINDS = {
+	'left':KEY_A,    
+	'right': KEY_D,    
 	'jump': KEY_SPACE,
 	'pause': KEY_P,
-	}
-var default_audio_settings ={
+	'l_mouse': BUTTON_LEFT,
+	'r_mouse': BUTTON_RIGHT,
+	'm_mouse': BUTTON_MIDDLE,
+	}	
+
+const DEFAULT_AUDIO_SETTINGS ={
 	'master_volume': 0,
 	'sfx_volume': 0,
 	'music_volume': 0,
 	}
 
+# ARRAY TO STORE INFO ABOUT PORTALS
+var PortalContainer = []
+
+# SETTINGS/CONFIG
+var config_file_name = "config.ini"
+var config_file
+
 signal add_message(aMessage)
 
 
-func _ready():	
+func _ready():    
 	PortalContainer.resize(2)
 	config_file = ConfigFile.new()
 	if !config_file.load(config_file_name) == OK:
+		print ("RESETUJE")
 		reset_config_file()
 	else:
+		print ("Ustawiam klawisze")
+		print (load_setting(config_file_name,"PLAYER_COLORS","player_hat_color"))
 		set_keybinds()
-	print("domel",set_player_colors())
+	
 
-# CONFIG FILE HANDLING
+func save_setting(aFileName : String, aSection : String, aKey : String, aValue):
+	var cfg_file = ConfigFile.new()
+	if cfg_file.load(aFileName) == OK:
+		cfg_file.set_value(aSection, aKey, aValue)
+	else:
+		print ("Failed to load ",aFileName,". Settings where not saved!")
+	
+func load_setting(aFileName : String, aSection : String, aKey : String):
+	
+	var value
+	if config_file.load(aFileName) == OK:
+		value = config_file.get_value(aSection, aKey)
+	else:
+		print ("Failed to load ",aFileName,". Settings where not loaded!")
+	
+	return value
+	
+		
+	
 func reset_config_file():
 	config_file.set_value("GENERAL","fullscreen",false)
 	
-	for key in default_keybinds:
-		config_file.set_value("KEYBINDS",key,default_keybinds[key])
+	for key in DEFAULT_KEYBINDS:
+		config_file.set_value("KEYBINDS",key,DEFAULT_KEYBINDS[key])
 	config_file.save(config_file_name)
 
-	for key in default_audio_settings:
-		config_file.set_value("AUDIO",key,default_audio_settings[key])
+	for key in DEFAULT_AUDIO_SETTINGS:
+		config_file.set_value("AUDIO",key,DEFAULT_AUDIO_SETTINGS[key])
 	config_file.save(config_file_name)
 	
 	# Reset player colors to default values
-	for key in Playervars.default_player_colors:
-		config_file.set_value("PLAYER_COLORS", key, Playervars.default_player_colors[key])
+	for key in DEFAULT_PLAYER_COLORS:
+		config_file.set_value("PLAYER_COLORS", key, DEFAULT_PLAYER_COLORS[key])
 	config_file.save(config_file_name)
 	
 	
@@ -60,6 +96,7 @@ func load_player_colors():
 	for key in config_file.get_section_keys("PLAYER_COLORS"):
 		var key_value = config_file.get_value("PLAYER_COLORS", key)
 		player_colors[key] = key_value
+	print ("PLAYER COLORS:\n",player_colors)
 	return player_colors
 
 func set_player_colors():
@@ -67,6 +104,9 @@ func set_player_colors():
 	var key_value
 	for key in loaded_player_colors.keys():
 		key_value = loaded_player_colors[key]
+		Playervars.current_player_colors[key] = key_value
+		
+		
 	return key_value
 
 	
@@ -120,4 +160,6 @@ func deletePortals():
 
 func add_message(aMessage):
 	emit_signal("add_message",aMessage)
+
+
 

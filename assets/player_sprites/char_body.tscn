@@ -5,7 +5,8 @@
 [ext_resource path="res://assets/player_sprites/hands_animation.png" type="Texture" id=3]
 [ext_resource path="res://assets/player_sprites/torso_animation.png" type="Texture" id=4]
 [ext_resource path="res://assets/player_sprites/char_body.gd" type="Script" id=5]
-[ext_resource path="res://assets/player_sprites/hat_bandana.png" type="Texture" id=6]
+[ext_resource path="res://assets/player_sprites/hats/hat_bandana.png" type="Texture" id=6]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
