@@ -18,12 +18,12 @@ var current_player_colors = {
 	"player_laser_color":Color(5.0, 1.0, 1.0, 1.0),	
 	}
 
-var player_torso_color = Color(1.0, 1.0, 1.0, 1.0)
-var player_legs_color = Color(1.0, 1.0, 1.0, 1.0)
-var player_skin_color = Color(1.0, 1.0, 1.0, 1.0)
-var player_hat_color = Color(1.0, 1.0, 1.0, 1.0)
-var laser_glow_color = Color(1.0, 1.0, 1.0, 1.0)
-var laser_beam_color = Color(1.0, 1.0, 1.0)
+#var player_torso_color = Color(1.0, 1.0, 1.0, 1.0)
+#var player_legs_color = Color(1.0, 1.0, 1.0, 1.0)
+#var player_skin_color = Color(1.0, 1.0, 1.0, 1.0)
+#var player_hat_color = Color(1.0, 1.0, 1.0, 1.0)
+#var laser_glow_color = Color(1.0, 1.0, 1.0, 1.0)
+#var laser_beam_color = Color(1.0, 1.0, 1.0)
 
 # Possible bug when there's no CustomizablePlayer scene in current scene...
 # onreadys below will be removed when CharacterCustomizator will be finished

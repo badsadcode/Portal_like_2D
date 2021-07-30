@@ -98,17 +98,7 @@ func _ready():
 	set_preview_model_hat()
 
 func load_settings():
-	var hat_color = Global.load_setting(Global.config_file_name,"PLAYER_COLORS","player_hat_color")
-	
-	var skin_color = Global.load_setting("config.ini","PLAYER_COLORS", "player_skin_color")
-	var torso_color = Global.load_setting("config.ini","PLAYER_COLORS", "player_torso_color")
-	var legs_color = Global.load_setting("config.ini","PLAYER_COLORS", "player_legs_color")
-	var laser_beam_color = Global.load_setting("config.ini","PLAYER_COLORS", "player_laser_beam_color")
-	var laser_glow_color = Global.load_setting("config.ini","PLAYER_COLORS", "player_laser_glow_color")
-	
-	# Set buttons colors
-	print ("Kolor hata to: ",hat_color)
-	print ("czy znalazlem: ",find_index_color(hat_color))
+	pass
 	
 # Function assigns given color to given model part (hat, hands, torso, legs)
 func set_preview_model_colors(aModelPart, aColor : Color):
@@ -188,26 +178,26 @@ func _on_hat_model_increase_button_pressed():
 func _on_laser_glow_increase_button_pressed():
 	laser_glow_color_index = increase_index(COLORS,laser_glow_color_index)
 	set_button_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
-	Playervars.laser_glow_color = COLORS[laser_glow_color_index]
+
 	
 
 
 func _on_laser_glow_decrease_button_pressed():
 	laser_glow_color_index = decrease_index(COLORS,laser_glow_color_index)
 	set_button_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
-	Playervars.laser_glow_color = COLORS[laser_glow_color_index]
+
 
 
 
 func _on_laser_beam_increase_button_pressed():
 	laser_beam_color_index = increase_index(COLORS,laser_beam_color_index)
 	set_button_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
-	Playervars.laser_beam_color = COLORS[laser_beam_color_index]
+	
 
 func _on_laser_beam_decrease_button_pressed():
 	laser_beam_color_index = decrease_index(COLORS,laser_beam_color_index)
 	set_button_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
-	Playervars.laser_beam_color = COLORS[laser_beam_color_index]
+	
 
 func increase_index(aArray, aIndex):
 	if aIndex + 1 <= aArray.size()-1:		

@@ -58,8 +58,7 @@ func save_setting(aFileName : String, aSection : String, aKey : String, aValue):
 	else:
 		print ("Failed to load ",aFileName,". Settings where not saved!")
 	
-func load_setting(aFileName : String, aSection : String, aKey : String):
-	
+func load_setting(aFileName : String, aSection : String, aKey : String):	
 	var value
 	if config_file.load(aFileName) == OK:
 		value = config_file.get_value(aSection, aKey)
