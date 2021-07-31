@@ -20,6 +20,7 @@ func add_message(aMessage: String):
 	#debug_window1.insert_text_at_cursor(aMessage+"\n")	
 
 func _ready():
+	$explosion.emitting = true
 	Global.connect("add_message",self,"add_message")
 	#SET spawn_position variable TO POSITION OF PARTICLES2D NODE OF THE PORTAL
 	spawn_position = $Particles2D.get_global_position()
@@ -31,6 +32,7 @@ func _ready():
 func _on_Area2D_body_entered(body):
 	#IF OBJECT THAT ENTERED PORTAL IS NOT A TILEMAP (NO TileMap STRING IN THE NAME OF OBJECT
 	if !("TileMap" in body.name):
+		$"explosion".restart()
 		exit_speed = body.max_velocity
 		enters_count += 1
 		print("_on_Area2D_body_entered(): exit_speed = ", exit_speed)
@@ -53,8 +55,10 @@ func _on_Area2D_body_exited(body):
 		#THIS IS MOST PROBLEMATIC FOR ME. I FOUND THAT THESE RULES WORKS QUITE WELL, BUT THEY SHOULD BE CHANGED
 		
 		# check the exit_direction of the other portal:
-		
+		Global.PortalContainer[abs(type - 1)].get_node("explosion").restart()
 		if Global.PortalContainer[0] != null and Global.PortalContainer[1] !=null:
+			
+			
 			match getPortalExitDirection(Global.PortalContainer[abs(type - 1)]):
 				8:
 					print("entrance up: halting horizontal motion, vertical motion is unaffected")

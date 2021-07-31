@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/images/portal.png" type="Texture" id=1]
 [ext_resource path="res://scenes/portal/Portal.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/light.png" type="Texture" id=3]
-
+[ext_resource path="res://scenes/portal/portal_deploy_particles.tres" type="Material" id=4]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.728682, 1 )
@@ -48,6 +48,18 @@ shape = SubResource( 4 )
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 4, 1 )
+texture = ExtResource( 3 )
+energy = 0.86
+
+[node name="explosion" type="Particles2D" parent="."]
+position = Vector2( 3.8125, 1.8125 )
+emitting = false
+amount = 72
+lifetime = 0.93
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = ExtResource( 4 )
 texture = ExtResource( 3 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
