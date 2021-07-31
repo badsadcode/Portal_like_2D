@@ -219,7 +219,7 @@ end_cap_mode = 2
 
 [node name="Laser_Beam_Particles" type="Particles2D" parent="Laser_Beam"]
 material = SubResource( 27 )
-amount = 300
+amount = 350
 lifetime = 0.25
 local_coords = false
 process_material = SubResource( 30 )

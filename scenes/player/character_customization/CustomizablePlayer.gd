@@ -48,14 +48,13 @@ func set_player_colors():
 	var texture_width = hat.texture.get_width()
 	var texture_height = hat.texture.get_height()		
 	hat.centered = false	
-	hat.set_offset(Vector2(-texture_width/2, -texture_height))
-	
-	
-	
+	hat.set_offset(Vector2(-texture_width/2, -texture_height))	
 	
 	body_torso.set_modulate(Playervars.current_player_colors["player_torso_color"])
 	body_legs.set_modulate(Playervars.current_player_colors["player_legs_color"])
+	laser_beam.set_modulate(Playervars.current_player_colors["player_laser_beam_color"])
 	laser_beam_particles.process_material.get_color_ramp().get_gradient().set_color(0,Playervars.current_player_colors["player_laser_glow_color"])
+	
 func _ready():	
 	set_player_colors()
 
@@ -75,13 +74,22 @@ func _process(delta):
 	setTilePointer(coord, raycast, tilemap)
 	deployPortals()
 
+func calculate_particles_count(aLength):
+	var particles_count = 0
+	particles_count = aLength * 10
+	return particles_count
+	
+	
 func point_laser_beam():
 	var cast_point = to_local(raycast.get_collision_point())
 	laser_beam_particles.position = cast_point * 0.5 
 	laser_beam_particles.rotation = (laser_beam.points[0] - cast_point).angle()
 	laser_beam_particles.process_material.emission_box_extents.x = cast_point.length() * 0.5
+	#laser_beam_particles.amount = int(calculate_particles_count(cast_point.length()))
+	print (cast_point.length(),"| Particles amount: ", int(calculate_particles_count(cast_point.length())))
 	laser_beam_particles.process_material.emission_box_extents.y = 0.3
 	laser_beam.points[1] = cast_point
+	
 
 
 
