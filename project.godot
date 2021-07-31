@@ -20,8 +20,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://scenes/world/Global.gd"
-Playervars="*res://scenes/player/playervars.gd"
+Global="*res://engine/Global.gd"
+Playervars="*res://engine/playervars.gd"
 SoundManager="*res://engine/audio/Sound_Manager.tscn"
 
 [display]

@@ -1,34 +1,34 @@
 [gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://assets/player_sprites/torso_animation.png" type="Texture" id=1]
-[ext_resource path="res://assets/player_sprites/legs_animation.png" type="Texture" id=2]
-[ext_resource path="res://assets/player_sprites/head_animation.png" type="Texture" id=3]
-[ext_resource path="res://assets/player_sprites/hands_animation.png" type="Texture" id=4]
-[ext_resource path="res://scenes/player/character_customization/CustomizablePlayer.gd" type="Script" id=5]
-[ext_resource path="res://assets/player_sprites/laser_particles_texture.png" type="Texture" id=6]
-[ext_resource path="res://scenes/player/character_customization/laser_particles_color_ramp.tres" type="Texture" id=7]
+[ext_resource path="res://assets/player_sprites/hands_animation.png" type="Texture" id=2]
+[ext_resource path="res://assets/player_sprites/legs_animation.png" type="Texture" id=3]
+[ext_resource path="res://assets/player_sprites/head_animation.png" type="Texture" id=4]
+[ext_resource path="res://scenes/player/CustomizablePlayer.gd" type="Script" id=5]
+[ext_resource path="res://scenes/player/laser_color_ramp.tres" type="Texture" id=6]
+[ext_resource path="res://assets/player_sprites/laser_particles_texture.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 3.5 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 4 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=7]
@@ -78,23 +78,23 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=19]
@@ -111,23 +111,23 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 2 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=25]
@@ -166,7 +166,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_random = 1.0
 scale_curve = SubResource( 29 )
-color_ramp = ExtResource( 7 )
+color_ramp = ExtResource( 6 )
 
 [node name="CustomizablePlayer" type="KinematicBody2D"]
 script = ExtResource( 5 )
@@ -221,9 +221,10 @@ end_cap_mode = 2
 material = SubResource( 27 )
 amount = 350
 lifetime = 0.25
+randomness = 0.97
 local_coords = false
 process_material = SubResource( 30 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true

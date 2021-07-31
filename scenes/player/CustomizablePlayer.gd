@@ -85,9 +85,10 @@ func point_laser_beam():
 	laser_beam_particles.position = cast_point * 0.5 
 	laser_beam_particles.rotation = (laser_beam.points[0] - cast_point).angle()
 	laser_beam_particles.process_material.emission_box_extents.x = cast_point.length() * 0.5
-	#laser_beam_particles.amount = int(calculate_particles_count(cast_point.length()))
-	print (cast_point.length(),"| Particles amount: ", int(calculate_particles_count(cast_point.length())))
-	laser_beam_particles.process_material.emission_box_extents.y = 0.3
+	# Code below causes particles emition to restart so it's not worth..
+	# laser_beam_particles.amount = int(calculate_particles_count(cast_point.length()))
+	
+	laser_beam_particles.process_material.emission_box_extents.y = 0.1
 	laser_beam.points[1] = cast_point
 	
 
