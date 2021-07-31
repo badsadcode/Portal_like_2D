@@ -6,7 +6,8 @@ var default_player_colors =	{
 	'player_legs_color':Color(1.0, 1.0, 1.0, 1.0),
 	'player_skin_color':Color(1.0, 1.0, 1.0, 1.0),
 	'player_hat_color':Color(1.0, 1.0, 1.0, 1.0),
-	'player_laser_color':Color(1.0, 1.0, 1.0, 1.0),	
+	'player_laser_beam_color':Color(1.0, 1.0, 1.0, 1.0),	
+	'player_laser_glow_color':Color(1.0, 1.0, 1.0, 1.0),	
 	}
 	
 var current_player_colors = {
@@ -15,9 +16,21 @@ var current_player_colors = {
 	"player_skin_color":Color(2.0, 1.0, 1.0, 1.0),
 	"player_torso_color":Color(3.0, 1.0, 1.0, 1.0),
 	"player_legs_color":Color(4.0, 1.0, 1.0, 1.0),
-	"player_laser_color":Color(5.0, 1.0, 1.0, 1.0),	
+	'player_laser_beam_color':Color(1.0, 1.0, 1.0, 1.0),	
+	'player_laser_glow_color':Color(1.0, 1.0, 1.0, 1.0),	
 	}
 
+
+func load_current_settings():
+	current_player_colors["player_hat_model"] = Global.config_file.get_value("PLAYER_COLORS","player_hat_model", default_player_colors["player_hat_model"])
+	current_player_colors["player_hat_color"] = Global.config_file.get_value("PLAYER_COLORS","player_hat_color", default_player_colors["player_hat_color"])
+	current_player_colors["player_torso_color"] = Global.config_file.get_value("PLAYER_COLORS","player_torso_color", default_player_colors["player_torso_color"])
+	current_player_colors["player_legs_color"] = Global.config_file.get_value("PLAYER_COLORS","player_legs_color", default_player_colors["player_legs_color"])
+	current_player_colors["player_laser_beam_color"] = Global.config_file.get_value("PLAYER_COLORS","player_laser_beam_color", default_player_colors["player_laser_beam_color"])
+	current_player_colors["player_laser_glow_color"] = Global.config_file.get_value("PLAYER_COLORS","player_laser_glow_color", default_player_colors["player_laser_glow_color"])	
+
+func _ready():
+	load_current_settings()
 #var player_torso_color = Color(1.0, 1.0, 1.0, 1.0)
 #var player_legs_color = Color(1.0, 1.0, 1.0, 1.0)
 #var player_skin_color = Color(1.0, 1.0, 1.0, 1.0)

@@ -63,42 +63,76 @@ const HAT_MODELS = [["res://assets/player_sprites/hats/hat_no_hat.png","NO HAT"]
 					]
 
 
-const COLORS = [Color(1.0, 1.0, 1.0),	#WHITE
-				Color(0.75, 0.076172, 0.076172),	# RED 
-				Color(0.365707, 0.75, 0.076172),	# GREEN
-				Color(0.076172, 0.402557, 0.75),	# BLUE
-				Color(0.665771, 0.076172, 0.75),	# PURPLE
-				Color(0.076172, 0.686829, 0.75),	# TEAL
-				Color(0.9375, 0.529003, 0.05127),	# ORANGE
-				Color(0.40625, 0.34322, 0.209473),	# SHIT IN THE WOODS
-				Color(1, 0.866667, 0), # JOHNNY BRAVO BLOND
-				Color(0.128906, 0.128906, 0.128906), #BLACK AS A NIGHT
+const COLORS = [Color(1.0, 1.0, 1.0, 1.0),	#WHITE
+				Color(0.75, 0.076172, 0.076172, 1.0),	# RED 
+				Color(0.365707, 0.75, 0.076172, 1.0),	# GREEN
+				Color(0.076172, 0.402557, 0.75, 1.0),	# BLUE
+				Color(0.665771, 0.076172, 0.75, 1.0),	# PURPLE
+				Color(0.076172, 0.686829, 0.75, 1.0),	# TEAL
+				Color(0.9375, 0.529003, 0.05127, 1.0),	# ORANGE
+				Color(0.40625, 0.34322, 0.209473, 1.0),	# SHIT IN THE WOODS
+				Color(1, 0.866667, 0, 1.0), # JOHNNY BRAVO BLOND
+				Color(0.128906, 0.128906, 0.128906, 1.0), #BLACK AS A NIGHT
 				]
 
 func find_index_color(aColor):
-	return COLORS.find(Color(aColor),0)
-	
-func load_setting(aFileName : String, aSection : String, aKey : String):
-	var cfg_file = ConfigFile.new()
-	var value
-	if cfg_file.load(aFileName) == OK:
-		value = cfg_file.get_value(aSection, aKey)
-	else:
-		print ("Failed to load ",aFileName,". Settings where not loaded!")
-		return null
-	return value
+	return COLORS.find(aColor,0)
 
-	
-func _ready():
-	
+func find_hat_model_index(aHatModel):
+	var result = 0
+	for index in HAT_MODELS.size():		
+		if HAT_MODELS[index][0] == aHatModel:			
+			result = index		
+	return result
+
+
+func _ready():	
 	original_position = self.get_global_position()
 	# Sets buttons colors on load
-# EXAMPLE: set_button_color(hat_color_button, hat_style_override, hat_color_index)
-	load_settings()
+	load_set_settings()
 	set_preview_model_hat()
 
-func load_settings():
-	pass
+func load_set_settings():
+	var hat_color = Global.get_setting("PLAYER_COLORS","player_hat_color")	
+	var hat_model = Global.get_setting("PLAYER_COLORS","player_hat_model")
+	hat_color_index = find_index_color(hat_color)	
+	hat_model_index = find_hat_model_index(hat_model)
+	set_button_color(hat_color_button, hat_style_override, hat_color_index)
+	set_preview_model_hat()
+	set_preview_model_colors(model_preview_hat,hat_color)
+	
+	var torso_color = Global.get_setting("PLAYER_COLORS", "player_torso_color")
+	torso_color_index = find_index_color(torso_color)
+	set_button_color(torso_color_button, torso_style_override, torso_color_index)
+	set_preview_model_colors(model_preview_torso,torso_color)
+	
+	var legs_color = Global.get_setting("PLAYER_COLORS", "player_legs_color")
+	legs_color_index = find_index_color(legs_color)
+	set_button_color(legs_color_button, legs_style_override, legs_color_index)
+	set_preview_model_colors(model_preview_legs,legs_color)
+	
+	var laser_beam_color = Global.get_setting("PLAYER_COLORS", "player_laser_beam_color")
+	laser_beam_color_index = find_index_color(laser_beam_color)
+	set_button_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
+	#set_preview_model_colors(model_preview_laser_beam,laser_beam_color) #NEED TO ADD SOME PREVIEW MODEL FOR LASER BEAM
+	
+	var laser_glow_color = Global.get_setting("PLAYER_COLORS", "player_laser_glow_color")
+	laser_glow_color_index = find_index_color(laser_glow_color)
+	set_button_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
+	#set_preview_model_colors(model_preview_laser_glow,laser_glow_color) #NEED TO ADD SOME PREVIEW MODEL FOR LASER glow
+
+# Save current settings to file
+func set_configfile_setting(aKey, aValue):
+	Global.set_setting("PLAYER_COLORS",aKey,aValue)	
+	#Global.config_file.save(Global.config_file_name)
+	
+
+func set_playervar_current_setting(aSetting, aValue):
+	Playervars.current_player_colors[aSetting] = aValue
+	print (Playervars.current_player_colors[aSetting])
+	
+# Sets current colors settings to playervars
+	
 	
 # Function assigns given color to given model part (hat, hands, torso, legs)
 func set_preview_model_colors(aModelPart, aColor : Color):
@@ -123,61 +157,88 @@ func _on_hat_increase_button_pressed():
 	hat_color_index = increase_index(COLORS,hat_color_index)
 	set_button_color(hat_color_button, hat_style_override, hat_color_index)	
 	set_preview_model_colors(model_preview_hat,COLORS[hat_color_index])
-
+	set_playervar_current_setting("player_hat_color",COLORS[hat_color_index])
+	set_configfile_setting("player_hat_color",COLORS[hat_color_index])
 	hat_increase.release_focus()
+	Global.config_file.save(Global.config_file_name)
 
 
 func _on_hat_decrease_button_pressed():	
 	hat_color_index = decrease_index(COLORS,hat_color_index)	
-	set_button_color(hat_color_button, hat_style_override, hat_color_index)
+	set_button_color(hat_color_button, hat_style_override, hat_color_index)	
 	set_preview_model_colors(model_preview_hat,COLORS[hat_color_index])
+	set_playervar_current_setting("player_hat_color",COLORS[hat_color_index])
+	set_configfile_setting("player_hat_color",COLORS[hat_color_index])
 	hat_decrease.release_focus()
+	Global.config_file.save(Global.config_file_name)
+	
 
 
 func _on_torso_decrease_button_pressed():	
 	torso_color_index = decrease_index(COLORS,torso_color_index)	
 	set_button_color(torso_color_button, torso_style_override, torso_color_index)
 	set_preview_model_colors(model_preview_torso,COLORS[torso_color_index])
+	set_playervar_current_setting("player_torso_color",COLORS[torso_color_index])
+	set_configfile_setting("player_torso_color",COLORS[torso_color_index])
 	torso_decrease.release_focus()
+	Global.config_file.save(Global.config_file_name)
 
 
 func _on_torso_increase_button_pressed():	
 	torso_color_index = increase_index(COLORS,torso_color_index)	
 	set_button_color(torso_color_button, torso_style_override, torso_color_index)
 	set_preview_model_colors(model_preview_torso,COLORS[torso_color_index])
+	set_playervar_current_setting("player_torso_color",COLORS[torso_color_index])
+	set_configfile_setting("player_torso_color",COLORS[torso_color_index])
 	torso_increase.release_focus()
+	Global.config_file.save(Global.config_file_name)
 
 
 func _on_legs_decrease_button_pressed():	
 	legs_color_index = decrease_index(COLORS,legs_color_index)	
 	set_button_color(legs_color_button, legs_style_override, legs_color_index)
 	set_preview_model_colors(model_preview_legs,COLORS[legs_color_index])
+	set_playervar_current_setting("player_legs_color",COLORS[legs_color_index])
+	set_configfile_setting("player_legs_color",COLORS[legs_color_index])
 	legs_decrease.release_focus()
+	Global.config_file.save(Global.config_file_name)
 
 func _on_legs_increase_button_pressed():	
 	legs_color_index = increase_index(COLORS,legs_color_index)	
 	set_button_color(legs_color_button, legs_style_override, legs_color_index)
 	set_preview_model_colors(model_preview_legs,COLORS[legs_color_index])
+	set_playervar_current_setting("player_legs_color",COLORS[legs_color_index])
+	set_configfile_setting("player_legs_color",COLORS[legs_color_index])
 	legs_increase.release_focus()
+	Global.config_file.save(Global.config_file_name)
 
 
 func _on_hat_model_decrease_button_pressed():
 	hat_model_index = decrease_index(HAT_MODELS, hat_model_index)
 	hat_model_button.text = HAT_MODELS[hat_model_index][1]
 	set_preview_model_hat()
+	set_playervar_current_setting("player_hat_model",HAT_MODELS[hat_model_index][0])
+	set_configfile_setting("player_hat_model",HAT_MODELS[hat_model_index][0])
 	hat_model_decrease.release_focus()
+	Global.config_file.save(Global.config_file_name)
 
 
 func _on_hat_model_increase_button_pressed():
 	hat_model_index = increase_index(HAT_MODELS, hat_model_index)
 	hat_model_button.text = HAT_MODELS[hat_model_index][1]
 	set_preview_model_hat()
+	set_playervar_current_setting("player_hat_model",HAT_MODELS[hat_model_index][0])
+	set_configfile_setting("player_hat_model",HAT_MODELS[hat_model_index][0])
 	hat_model_increase.release_focus()
+	Global.config_file.save(Global.config_file_name)
 
 
 func _on_laser_glow_increase_button_pressed():
 	laser_glow_color_index = increase_index(COLORS,laser_glow_color_index)
 	set_button_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
+	set_playervar_current_setting("player_laser_glow_color",COLORS[laser_glow_color_index])
+	set_configfile_setting("player_laser_glow_color",COLORS[laser_glow_color_index])
+	Global.config_file.save(Global.config_file_name)
 
 	
 
@@ -185,6 +246,9 @@ func _on_laser_glow_increase_button_pressed():
 func _on_laser_glow_decrease_button_pressed():
 	laser_glow_color_index = decrease_index(COLORS,laser_glow_color_index)
 	set_button_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
+	set_playervar_current_setting("player_laser_glow_color",COLORS[laser_glow_color_index])
+	set_configfile_setting("player_laser_glow_color",COLORS[laser_glow_color_index])
+	Global.config_file.save(Global.config_file_name)
 
 
 
@@ -192,24 +256,40 @@ func _on_laser_glow_decrease_button_pressed():
 func _on_laser_beam_increase_button_pressed():
 	laser_beam_color_index = increase_index(COLORS,laser_beam_color_index)
 	set_button_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
+	set_playervar_current_setting("player_laser_beam_color",COLORS[laser_beam_color_index])
+	set_configfile_setting("player_laser_beam_color",COLORS[laser_beam_color_index])
+	Global.config_file.save(Global.config_file_name)
 	
 
 func _on_laser_beam_decrease_button_pressed():
 	laser_beam_color_index = decrease_index(COLORS,laser_beam_color_index)
 	set_button_color(laser_beam_color_button, laser_beam_style_override, laser_beam_color_index)
+	set_playervar_current_setting("player_laser_beam_color",COLORS[laser_beam_color_index])
+	set_configfile_setting("player_laser_beam_color",COLORS[laser_beam_color_index])
+	Global.config_file.save(Global.config_file_name)
 	
-
-func increase_index(aArray, aIndex):
+	
+func increase_index(aArray, aIndex):	
 	if aIndex + 1 <= aArray.size()-1:		
-		aIndex += 1
-	else:		
+		aIndex += 1		
+
+	else:
+
 		return 0
+
 	return aIndex
 
 
 func decrease_index(aArray, aIndex):
 	if aIndex - 1 >= 0:
-		aIndex -= 1
-	else:
-		return aArray.size()-1
+		aIndex -= 1		
+	
+	else:	
+	
+		return aArray.size()-1	
+	
 	return aIndex
+
+
+func _on_Button_pressed():
+	get_tree().change_scene("res://scenes/menus/MainMenu.tscn")

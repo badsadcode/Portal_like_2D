@@ -43,10 +43,14 @@ onready var raycast = $"RayCast2D"
 const PORTAL_ORANGE = 0
 const PORTAL_BLUE = 1
 
-
+func set_player_colors():
+	hat.texture = load(Playervars.current_player_colors["player_hat_model"])
+	hat.set_modulate(Playervars.current_player_colors["player_hat_color"])
+	body_torso.set_modulate(Playervars.current_player_colors["player_torso_color"])
+	body_legs.set_modulate(Playervars.current_player_colors["player_legs_color"])
 
 func _ready():	
-	Playervars.connect("update_appearance",self,"update_appearance")
+	set_player_colors()
 
 
 func set_sprite_direction():
@@ -70,8 +74,8 @@ func point_laser_beam():
 	laser_beam_particles.rotation = (laser_beam.points[0] - cast_point).angle()
 	laser_beam_particles.process_material.emission_box_extents.x = cast_point.length() * 0.5
 	laser_beam_particles.process_material.emission_box_extents.y = 0.3
-	laser_beam.default_color = Playervars.laser_beam_color
-	laser_glow.default_color = Playervars.laser_glow_color
+	#laser_beam.default_color = Playervars.laser_beam_color
+	#laser_glow.default_color = Playervars.laser_glow_color
 	laser_beam.points[1] = cast_point
 	laser_glow.points[1] = cast_point
 

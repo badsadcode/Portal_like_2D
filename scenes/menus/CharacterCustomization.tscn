@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/menus/CharacterCustomization.gd" type="Script" id=1]
+[ext_resource path="res://assets/backgrounds/panel_tile.png" type="Texture" id=2]
 [ext_resource path="res://assets/player_sprites/char_body.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/themes/menu_default.theme" type="Theme" id=4]
 
@@ -272,9 +273,39 @@ margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 text = ">"
 
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 108.0
+margin_right = 96.0
+margin_bottom = 116.0
+text = "EXIT"
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color( 0.396078, 0.396078, 0.396078, 1 )
+margin_left = 177.383
+margin_top = 13.5281
+margin_right = 234.383
+margin_bottom = 86.5281
+texture = ExtResource( 2 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background2" type="TextureRect" parent="."]
+modulate = Color( 0.286275, 0.698039, 1, 1 )
+margin_left = 177.383
+margin_top = 85.5281
+margin_right = 234.383
+margin_bottom = 94.5281
+texture = ExtResource( 2 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Body" parent="." instance=ExtResource( 3 )]
 self_modulate = Color( 0.128906, 0.128906, 0.128906, 1 )
-position = Vector2( 193, 62.7773 )
+position = Vector2( 203.383, 62.3054 )
 rotation = -3.14159
 scale = Vector2( 3, -3 )
 
@@ -290,3 +321,4 @@ scale = Vector2( 3, -3 )
 [connection signal="pressed" from="VBoxContainer/Laser_Beam/HBoxContainer/laser_beam_increase_button" to="." method="_on_laser_beam_increase_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Laser_Glow/HBoxContainer/laser_glow_decrease_button" to="." method="_on_laser_glow_decrease_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Laser_Glow/HBoxContainer/laser_glow_increase_button" to="." method="_on_laser_glow_increase_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
