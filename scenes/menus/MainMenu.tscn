@@ -6,8 +6,8 @@
 [ext_resource path="res://assets/images/smoke_particles_texture.png" type="Texture" id=4]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.991914 )
-colors = PoolColorArray( 1, 1, 1, 0.258824, 1, 1, 1, 0 )
+offsets = PoolRealArray( 0, 0.32345, 0.991914 )
+colors = PoolColorArray( 1, 1, 1, 0.258824, 0.378044, 0.583008, 0.538572, 0.174425, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
@@ -21,13 +21,15 @@ spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 16.71
 initial_velocity_random = 1.0
-angular_velocity = 0.69
+angular_velocity = 23.83
 angular_velocity_random = 0.61
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 1.13
 scale_random = 1.0
 color_ramp = SubResource( 2 )
+hue_variation = 0.02
+hue_variation_random = 1.0
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -47,9 +49,9 @@ __meta__ = {
 }
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( -49.3891, 72.3337 )
-amount = 132
-lifetime = 93.52
+position = Vector2( -97.4976, 71.4428 )
+amount = 409
+lifetime = 359.87
 preprocess = 97.82
 process_material = SubResource( 3 )
 texture = ExtResource( 4 )
@@ -92,4 +94,5 @@ margin_right = 92.0
 margin_bottom = 44.0
 text = "EXIT"
 
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Character_Customization" to="." method="_on_Character_Customization_pressed"]

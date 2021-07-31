@@ -18,3 +18,7 @@ func _ready():
 
 func _on_Character_Customization_pressed():
 	get_tree().change_scene("res://scenes/menus/CharacterCustomization.tscn")
+
+
+func _on_Button_pressed():
+	get_tree().change_scene("res://scenes/world/World.tscn")

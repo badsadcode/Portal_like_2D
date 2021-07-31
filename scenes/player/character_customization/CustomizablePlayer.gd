@@ -25,7 +25,6 @@ var exiting_portal = false
 onready var coord = $"../Coord"
 onready var tilemap = $"../TileMap"
 onready var laser_beam = $"Laser_Beam"
-onready var laser_glow = $"Laser_Glow"
 onready var laser_beam_particles = $"Laser_Beam/Laser_Beam_Particles"
 var PortalObject = load("res://scenes/portal/Portal.tscn")
 
@@ -46,9 +45,17 @@ const PORTAL_BLUE = 1
 func set_player_colors():
 	hat.texture = load(Playervars.current_player_colors["player_hat_model"])
 	hat.set_modulate(Playervars.current_player_colors["player_hat_color"])
+	var texture_width = hat.texture.get_width()
+	var texture_height = hat.texture.get_height()		
+	hat.centered = false	
+	hat.set_offset(Vector2(-texture_width/2, -texture_height))
+	
+	
+	
+	
 	body_torso.set_modulate(Playervars.current_player_colors["player_torso_color"])
 	body_legs.set_modulate(Playervars.current_player_colors["player_legs_color"])
-
+	laser_beam_particles.process_material.get_color_ramp().get_gradient().set_color(0,Playervars.current_player_colors["player_laser_glow_color"])
 func _ready():	
 	set_player_colors()
 
@@ -74,19 +81,8 @@ func point_laser_beam():
 	laser_beam_particles.rotation = (laser_beam.points[0] - cast_point).angle()
 	laser_beam_particles.process_material.emission_box_extents.x = cast_point.length() * 0.5
 	laser_beam_particles.process_material.emission_box_extents.y = 0.3
-	#laser_beam.default_color = Playervars.laser_beam_color
-	#laser_glow.default_color = Playervars.laser_glow_color
 	laser_beam.points[1] = cast_point
-	laser_glow.points[1] = cast_point
 
-#func _draw():
-#	#Draw line showing where player is pointing his portal gun
-#	var laser_glow_color = Playervars.laser_glow_color
-#	var laser_beam_color = Playervars.laser_beam_color
-#	laser_glow_color.a = 0.3
-#	laser_beam_color.a = 0.9
-#	draw_line(Vector2(0,0), raycast.get_collision_point() - get_global_position(), laser_glow_color, 1.25, true)
-#	draw_line(Vector2(0,0), raycast.get_collision_point() - get_global_position(), laser_beam_color, 1.0, true)
 
 
 func get_max_velocity():
