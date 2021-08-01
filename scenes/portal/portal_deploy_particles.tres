@@ -11,4 +11,4 @@ initial_velocity_random = 0.71
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.18
-color = Color( 1, 1, 1, 0.0509804 )
+color = Color( 1, 1, 1, 0.0156863 )

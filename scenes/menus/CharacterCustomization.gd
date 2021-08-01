@@ -237,7 +237,7 @@ func _on_laser_glow_increase_button_pressed():
 	laser_glow_color_index = increase_index(COLORS,laser_glow_color_index)
 	set_button_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
 	var laser_glow_color_alpha = COLORS[laser_glow_color_index]
-	laser_glow_color_alpha.a = laser_glow_color_alpha.a * 0.5
+	laser_glow_color_alpha.a = laser_glow_color_alpha.a * 0.3
 	set_playervar_current_setting("player_laser_glow_color",laser_glow_color_alpha)
 	set_configfile_setting("player_laser_glow_color",laser_glow_color_alpha)
 	Global.config_file.save(Global.config_file_name)
@@ -249,7 +249,7 @@ func _on_laser_glow_decrease_button_pressed():
 	laser_glow_color_index = decrease_index(COLORS,laser_glow_color_index)
 	set_button_color(laser_glow_color_button, laser_glow_style_override, laser_glow_color_index)
 	var laser_glow_color_alpha = COLORS[laser_glow_color_index]
-	laser_glow_color_alpha.a = laser_glow_color_alpha.a * 0.5
+	laser_glow_color_alpha.a = laser_glow_color_alpha.a * 0.3
 	set_playervar_current_setting("player_laser_glow_color",laser_glow_color_alpha)
 	set_configfile_setting("player_laser_glow_color",laser_glow_color_alpha)
 	Global.config_file.save(Global.config_file_name)
