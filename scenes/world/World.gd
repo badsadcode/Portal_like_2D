@@ -17,15 +17,15 @@ func set_debug_line(aLine, aText, aValue):
 	aLine.text = aText + " : " +str(aValue)
 
 
-func _process(delta):
+func _process(_delta):
 	set_debug_line(debug_line1, "MOTION.X", player.motion.x)
 	set_debug_line(debug_line2, "MOTION.Y", player.motion.y)
 	set_debug_line(debug_line3, "POSITION", player.get_global_position())
 	set_debug_line(debug_line4, "MAX VELOCITY", player.max_velocity)
-	if Global.PortalContainer[0] != null:
-		set_debug_line(debug_line5, "ORANGE PORTAL",  str("Position: ",Global.PortalContainer[0].position," ENTERS:",Global.PortalContainer[0].enters_count))
-	if Global.PortalContainer[1] != null:
-		set_debug_line(debug_line6, "BLUE PORTAL", str("Position: ",Global.PortalContainer[1].position," ENTERS:",Global.PortalContainer[1].enters_count))
+#	if PortalControl.portals[0] != null:
+#		set_debug_line(debug_line5, "ORANGE PORTAL",  str("Position: ", PortalControl.portals[0].position, " ENTERS:", PortalControl.portals[0].enters_count))
+#	if PortalControl.portals[1] != null:
+#		set_debug_line(debug_line6, "BLUE PORTAL", str("Position: ", PortalControl.portals[1].position, " ENTERS:", PortalControl.portals[1].enters_count))
 	
 	if Input.is_action_just_pressed("char_customise"):
 		if !customizator:

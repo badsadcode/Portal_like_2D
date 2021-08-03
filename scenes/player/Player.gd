@@ -10,8 +10,6 @@ const JUMP_FORCE = 72
 
 var motion = Vector2()
 
-
-	
 #HELPER VARIABLES VELOCITY
 var max_velocity = 0.0
 var current_velocity = 0.0
@@ -36,7 +34,6 @@ onready var hat = $"Body/Hat"
 
 # let's not search for the raycast in _process(), for the same reason
 onready var raycast = $"RayCast2D"
-
 
 # portal type constants, for code clarity
 const PORTAL_ORANGE = 0
@@ -66,20 +63,20 @@ func set_sprite_direction():
 		$Body.scale.x  = -1
 
 
-func _process(delta):	
+func _process(_delta):	
 	set_sprite_direction()	
 	
 	#GUN RAYCAST
 	raycast.cast_to = (get_viewport().get_mouse_position() - get_global_position()) * 300
 	setTilePointer(coord, raycast, tilemap)
-	deployPortals()
+	PortalControl.deployPortals()
 
 func calculate_particles_count(aLength):
 	var particles_count = 0
 	particles_count = aLength * 10
 	return particles_count
-	
-	
+
+
 func point_laser_beam():
 	var cast_point = to_local(raycast.get_collision_point())
 	laser_beam_particles.position = cast_point * 0.5 
@@ -90,8 +87,6 @@ func point_laser_beam():
 	
 	laser_beam_particles.process_material.emission_box_extents.y = 0.1
 	laser_beam.points[1] = cast_point
-	
-
 
 
 func get_max_velocity():
@@ -102,12 +97,13 @@ func get_max_velocity():
 		max_velocity=lerp(max_velocity, MAX_SPEED, FRICTION)
 
 
+
 func _physics_process(delta):
 	point_laser_beam()
 	get_max_velocity()	
 	handle_inputs(delta)
-	motion = move_and_slide(motion, Vector2.UP, false, 4, PI/4, false)
-
+	var _moved_and_slid = move_and_slide(motion, Vector2.UP, false, 4, PI/4, false)
+	
 
 func play_animations(aAnimation: String):	
 	body_head.play(aAnimation)
@@ -117,61 +113,75 @@ func play_animations(aAnimation: String):
 
 
 func handle_inputs(aDelta):	
-	#APPLY GRAVITY
-	motion.y += GRAVITY  * aDelta
-	
-	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")	
-	if x_input != 0:
-		play_animations("run")
-		if is_on_floor():
-			motion.x += x_input * ACCELERATION * aDelta
+	if !exiting_portal:
+		#APPLY GRAVITY
+		if is_on_ceiling():
+			print("touched ceiling, resetting vertical motion")
+			motion.y = 0.01
+		elif is_on_floor():
+			print("touched floor, resetting vertical motion")
+			motion.y = 0.01
 		else:
-			motion.x += x_input * (ACCELERATION * AIR_RESISTANCE) * aDelta
-		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
-	else:		
-		play_animations("stand")
-
-
-	if is_on_floor():
-		if x_input == 0:
-			motion.x = lerp(motion.x, 0, FRICTION)
-		if Input.is_action_pressed("jump"):
-			motion.y = -JUMP_FORCE
-	else:
-		if x_input == 0:
-			motion.x = lerp(motion.x, 0, AIR_RESISTANCE)
-	
+			motion.y += GRAVITY * aDelta
+		
+		# get input
+		var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
+		
+		# handle animation
+		if x_input != 0:
+			play_animations("run")
+		else:		
+			play_animations("stand")
+		
+		# apply movement
+		if x_input != 0:
+			if is_on_floor():
+				motion.x += x_input * ACCELERATION * aDelta
+			else:
+				motion.x += x_input * (ACCELERATION * AIR_RESISTANCE) * aDelta
+			motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
+		
+		# apply friction with air or floor
+		if is_on_floor():
+			if x_input == 0:
+				motion.x = lerp(motion.x, 0, FRICTION)
+			if Input.is_action_just_pressed("jump"):
+				motion.y = -JUMP_FORCE
+		else:
+			if x_input == 0:
+				motion.x = lerp(motion.x, 0, AIR_RESISTANCE)
+		
 	#ORANGE PORTAL
 	if Input.is_action_just_pressed("l_mouse"):
-		#Check if orange portal is in Global.PortalContainer[0]. If null create one and add to array
+		#Check if orange portal is in PortalControl.portals[0]. If null create one and add to array
 		if raycast.get_collider().name=="TileMap3":
 			place_portal(PORTAL_ORANGE)
-
-	# BLU PORTAL
+	
+	# BLUE PORTAL
 	if Input.is_action_just_pressed("r_mouse"):
-		#Check if blue portal is in Global.PortalContainer[0]. If null create one and add to array
+		#Check if blue portal is in PortalControl.portals[0]. If null create one and add to array
 		if raycast.get_collider().name=="TileMap3":
 			place_portal(PORTAL_BLUE)
-		
+	
 	#DELETE PORTALS
 	if Input.is_action_just_pressed("m_mouse"):
-		Global.deletePortals()
+		PortalControl.delete_all_portals()
 		OrangeDeployed = false
 		BlueDeployed = false
 
 
 func place_portal(aPortalType):
-	if Global.PortalContainer[aPortalType] == null:
-		var NewPortal = PortalObject.instance()		
-		Global.PortalContainer[aPortalType] = NewPortal		
-		Global.PortalContainer[aPortalType].type = aPortalType			
-		Global.PortalContainer[aPortalType].set_rotation_degrees(getPortalRotation($RayCast2D))
-		Global.PortalContainer[aPortalType].position = getPortalPosition($RayCast2D, tilemap, coord.get_global_position(), tilemap.get_cell_size())			
-		
+	if PortalControl.portals[aPortalType] == null:
+		var NewPortal = PortalObject.instance()
+		PortalControl.portals[aPortalType] = NewPortal
+		PortalControl.portals[aPortalType].type = aPortalType
+		PortalControl.portals[aPortalType].set_rotation_degrees(getPortalRotation($RayCast2D))
+		PortalControl.portals[aPortalType].position = getPortalPosition($RayCast2D, tilemap, coord.get_global_position(), tilemap.get_cell_size())
+	
 	else:
-		Global.PortalContainer[aPortalType].set_rotation_degrees(getPortalRotation($RayCast2D))			
-		Global.PortalContainer[aPortalType].position = getPortalPosition($RayCast2D, tilemap, coord.get_global_position(), tilemap.get_cell_size())
-		Global.PortalContainer[aPortalType].spawn_position = Global.PortalContainer[aPortalType].get_node("Particles2D").get_global_position()	
+		PortalControl.portals[aPortalType].set_rotation_degrees(getPortalRotation($RayCast2D))
+		PortalControl.portals[aPortalType].position = getPortalPosition($RayCast2D, tilemap, coord.get_global_position(), tilemap.get_cell_size())
+		PortalControl.portals[aPortalType].spawn_position = PortalControl.portals[aPortalType].get_node("Particles2D").get_global_position()
 
 
 func getPortalRotation(aRayCast : RayCast2D):
@@ -179,7 +189,6 @@ func getPortalRotation(aRayCast : RayCast2D):
 	# Arguments description:
 	# aRayCast - RayCast2D object of which normal is calculated
 	
-# TM 20210725 - simplified conditional statement
 	match aRayCast.get_collision_normal().normalized() as Vector2:
 		Vector2.DOWN:
 			return 0
@@ -196,10 +205,9 @@ func getPortalPosition(aRayCast: RayCast2D, aTileMap: TileMap, aCoord: Vector2, 
 	# Arguments description:
 	# aRayCast - RayCast2D object of which normal is calculated
 	# aTileMap - TileMap object to use
-	# aCoord - coords of a tile/cell pointed by user. 
-	# aTileSize - size of a cell of aTileMap	
-
-# TM 20210725 - simplified conditional statement
+	# aCoord - coords of a tile/cell pointed by user.
+	# aTileSize - size of a cell of aTileMap
+	
 	match aRayCast.get_collision_normal().normalized():
 		Vector2.DOWN:
 			return getTilePoints(aTileMap, aCoord, aTileSize)[2]
@@ -217,15 +225,15 @@ func getTilePoints(aTileMap: TileMap, aCoord: Vector2, aTileSize: Vector2):
 	# aTileMap - TileMap object to use
 	# aCoord - coords of a tile/cell pointed by user. 
 	# aTileSize - size of a cell of aTileMap
-		var tile = aTileMap.world_to_map(aCoord)
-		#Converts aCoord to index of aTile
-		var topLeft = tile*aTileSize
-		var topRight = Vector2(tile.x * aTileSize.x + aTileSize.x, tile.y * aTileSize.y)
-		var bottomLeft = Vector2(tile.x * aTileSize.x, tile.y * aTileSize.y + aTileSize.y)
-		var bottomRight = Vector2(tile.x * aTileSize.x + aTileSize.x, tile.y * aTileSize.y + aTileSize.y)	
-		var center = topLeft + aTileMap.get_cell_size() / 2
-		
-		return [topLeft, topRight, bottomLeft, bottomRight, center]
+	var tile = aTileMap.world_to_map(aCoord)
+	#Converts aCoord to index of aTile
+	var topLeft = tile*aTileSize
+	var topRight = Vector2(tile.x * aTileSize.x + aTileSize.x, tile.y * aTileSize.y)
+	var bottomLeft = Vector2(tile.x * aTileSize.x, tile.y * aTileSize.y + aTileSize.y)
+	var bottomRight = Vector2(tile.x * aTileSize.x + aTileSize.x, tile.y * aTileSize.y + aTileSize.y)	
+	var center = topLeft + aTileMap.get_cell_size() / 2
+	
+	return [topLeft, topRight, bottomLeft, bottomRight, center]
 
 
 func setTilePointer(aObject: Node2D, aRayCast: RayCast2D, aTileMap: TileMap):
@@ -234,11 +242,11 @@ func setTilePointer(aObject: Node2D, aRayCast: RayCast2D, aTileMap: TileMap):
 
 
 func deployPortals():
-	if Global.PortalContainer[0] != null and !OrangeDeployed:
-		owner.add_child(Global.PortalContainer[0])
+	if PortalControl.portals[0] != null and !OrangeDeployed:
+		owner.add_child(PortalControl.portals[0])
 		OrangeDeployed = true
-	if Global.PortalContainer[1] != null and !BlueDeployed:
-		owner.add_child(Global.PortalContainer[1])
+	if PortalControl.portals[1] != null and !BlueDeployed:
+		owner.add_child(PortalControl.portals[1])
 		BlueDeployed = true	
 
 
@@ -246,4 +254,15 @@ func update_appearance():
 	Playervars.update_appearance()
 
 
+func _on_Portal_Exit_Timer_timeout():
+	exiting_portal = false
+	print("Portal Exit Timer timed out")
 
+
+func activate_portal_timer():
+	var _timer = $"Portal Exit Timer"
+	if !_timer.is_stopped():
+		_timer.stop()
+		print("Stopped Portal Exit Timer because it was still running")
+	_timer.start()
+	print("Started Portal Exit Timer")

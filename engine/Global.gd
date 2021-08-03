@@ -32,7 +32,7 @@ const DEFAULT_AUDIO_SETTINGS ={
 	}
 
 # ARRAY TO STORE INFO ABOUT PORTALS
-var PortalContainer = []
+#var PortalContainer = []
 
 # SETTINGS/CONFIG
 var config_file_name = "res://config.ini"
@@ -42,7 +42,7 @@ signal add_message(aMessage)
 
 
 func _ready():    	
-	PortalContainer.resize(2)
+#	PortalContainer.resize(2)
 	config_file = ConfigFile.new()
 	var err = config_file.load(config_file_name)
 	print ("udalo?: ", err)
@@ -155,14 +155,14 @@ func set_audio_settings():
 	AudioServer.set_bus_volume_db(2,load_audio_settings()[2])
 
 
-func deletePortals():
-	if PortalContainer[0] != null:
-		PortalContainer[0].queue_free()
-		PortalContainer[0] = null
-		
-	if PortalContainer[1] != null:
-		PortalContainer[1].queue_free()
-		PortalContainer[1] = null
+#func deletePortals():
+#	if PortalContainer[0] != null:
+#		PortalContainer[0].queue_free()
+#		PortalContainer[0] = null
+#
+#	if PortalContainer[1] != null:
+#		PortalContainer[1].queue_free()
+#		PortalContainer[1] = null
 
 
 func add_message(aMessage):

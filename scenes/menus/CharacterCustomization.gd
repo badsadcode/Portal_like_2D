@@ -293,4 +293,5 @@ func decrease_index(aArray, aIndex):
 
 
 func _on_Button_pressed():
-	get_tree().change_scene("res://scenes/menus/MainMenu.tscn")
+	if get_tree().change_scene("res://scenes/menus/MainMenu.tscn") != OK:
+		assert(false,"Failed to change to MainMenu scene")
